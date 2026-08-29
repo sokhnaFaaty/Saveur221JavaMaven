@@ -1,5 +1,6 @@
-package main.java.com.saveur221.enums;
+package com.saveur221.enums;
 
-public class Role {
-    
+public enum Role {
+    ADMIN,
+    GERANT
 }
