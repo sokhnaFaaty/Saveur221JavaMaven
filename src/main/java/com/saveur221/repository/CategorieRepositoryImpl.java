@@ -11,6 +11,9 @@ import java.util.Optional;
 import com.saveur221.config.DatabaseConfig;
 import com.saveur221.entities.Categorie;
 import com.saveur221.exceptions.CategorieNonSupprimableException;
+import com.saveur221.interfaces.CategorieRepositoryInterface;
+
+
 
 public class CategorieRepositoryImpl implements CategorieRepositoryInterface{
     private static final String NON_SUPPRIME = " AND deleted_at IS NULL";
