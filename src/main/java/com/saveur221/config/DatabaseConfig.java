@@ -28,7 +28,7 @@ public final class DatabaseConfig {
         //c;asse Utilitaire, non instanciable
     }
 
-    public static Connection getConnetion() throws SQLException{
+    public static Connection getConnection() throws SQLException{
         return DriverManager.getConnection(
             PROPS.getProperty("db.url"),            
             PROPS.getProperty("db.user"),
