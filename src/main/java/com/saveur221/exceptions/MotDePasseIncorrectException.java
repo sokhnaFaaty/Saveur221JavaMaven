@@ -1,5 +1,10 @@
-package main.java.com.saveur221.exceptions;
+package com.saveur221.exceptions;
 
-public class MotDePasseIncorrectException {
-    
+import com.saveur221.exceptions.SaveurException;
+
+public class MotDePasseIncorrectException extends SaveurException {
+    public MotDePasseIncorrectException(String message) {
+        super(message);
+    }
+
 }

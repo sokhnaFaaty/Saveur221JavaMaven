@@ -1,5 +1,8 @@
-package main.java.com.saveur221.exceptions;
+package com.saveur221.exceptions;
 
-public class StockInsuffisantException {
-    
+public class StockInsuffisantException extends SaveurException{
+    public StockInsuffisantException(String message) {
+        super(message);
+    }
+
 }
