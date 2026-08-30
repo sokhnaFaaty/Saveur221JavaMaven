@@ -6,6 +6,7 @@ import com.saveur221.entities.Categorie;
 import com.saveur221.entities.Produit;
 import com.saveur221.exceptions.ProduitInexistantException;
 import com.saveur221.interfaces.CategorieRepositoryInterface;
+import com.saveur221.exceptions.CategorieInexistanteException;
 import com.saveur221.interfaces.ProduitRepositoryInterface;
 
 public class ProduitService {
