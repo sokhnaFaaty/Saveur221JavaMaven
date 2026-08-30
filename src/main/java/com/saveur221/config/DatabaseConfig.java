@@ -20,7 +20,7 @@ public final class DatabaseConfig {
                     }
                     PROPS.load(in);
                 }catch(IOException e){
-                    throw new IllegalStateException("Erreur de la lecture de application.properties",e)
+                    throw new IllegalStateException("Erreur de la lecture de application.properties",e);
                 }
     }
 
