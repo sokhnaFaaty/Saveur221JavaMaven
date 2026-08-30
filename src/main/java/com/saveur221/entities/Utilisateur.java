@@ -15,18 +15,22 @@ public class Utilisateur {
     public Utilisateur(){
 
     }
+    private static final String REGEX_TELEPHONE = "^(\\+221)?7[0-9]{8}$|^(\\+220)?[23679][0-9]{6}$";
+
 
     public Utilisateur(Long id, String nom, String prenom, String email, String motDePasse,
         String telephone, Role role, boolean actif, String image){
             this.id=id;
             this.nom=nom;
             this.prenom=prenom;
+            this.email=email;
             this.motDePasse=motDePasse;
-            this.telephone=telephone;
+            setTelephone(telephone);
             this.role=role;
             this.actif=actif;
             this.image=image;
         }
+        
     public Long getId(){
         return id;
     }
@@ -43,7 +47,7 @@ public class Utilisateur {
         this.nom=nom;
     }
 
-    public String getPrenom(String prenom){
+    public String getPrenom(){
         return prenom;
     }
 
@@ -69,7 +73,12 @@ public class Utilisateur {
     }
     
     public void setTelephone(String telephone){
-        this.telephone=telephone;
+        
+    if (telephone != null && !telephone.matches(REGEX_TELEPHONE)) {
+            throw new IllegalArgumentException("Numero de telephone invalide (Senegal ou Gambie).");
+        }
+        this.telephone = telephone;
+
     }
     public Role getRole() {
         return role;

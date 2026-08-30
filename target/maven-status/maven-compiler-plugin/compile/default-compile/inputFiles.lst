@@ -9,6 +9,7 @@ C:\Users\user\Desktop\saveur221-java\src\main\java\com\saveur221\enums\Etat.java
 C:\Users\user\Desktop\saveur221-java\src\main\java\com\saveur221\enums\Role.java
 C:\Users\user\Desktop\saveur221-java\src\main\java\com\saveur221\enums\Statut.java
 C:\Users\user\Desktop\saveur221-java\src\main\java\com\saveur221\exceptions\AccesRefuseeException.java
+C:\Users\user\Desktop\saveur221-java\src\main\java\com\saveur221\exceptions\CategorieInexistanteException.java
 C:\Users\user\Desktop\saveur221-java\src\main\java\com\saveur221\exceptions\CategorieNonSupprimableException.java
 C:\Users\user\Desktop\saveur221-java\src\main\java\com\saveur221\exceptions\CommandeInexistanteException.java
 C:\Users\user\Desktop\saveur221-java\src\main\java\com\saveur221\exceptions\CompteDesactiveException.java
@@ -23,5 +24,10 @@ C:\Users\user\Desktop\saveur221-java\src\main\java\com\saveur221\exceptions\Util
 C:\Users\user\Desktop\saveur221-java\src\main\java\com\saveur221\interfaces\CategorieRepositoryInterface.java
 C:\Users\user\Desktop\saveur221-java\src\main\java\com\saveur221\interfaces\CommandeRepositoryInterface.java
 C:\Users\user\Desktop\saveur221-java\src\main\java\com\saveur221\interfaces\PaiementRepositoryInterface.java
-C:\Users\user\Desktop\saveur221-java\src\main\java\com\saveur221\interfaces\ProduitRepositorieInterface.java
+C:\Users\user\Desktop\saveur221-java\src\main\java\com\saveur221\interfaces\ProduitRepositoryInterface.java
 C:\Users\user\Desktop\saveur221-java\src\main\java\com\saveur221\interfaces\UtilisateurRepositoryInterface.java
+C:\Users\user\Desktop\saveur221-java\src\main\java\com\saveur221\repository\CategorieRepositoryImpl.java
+C:\Users\user\Desktop\saveur221-java\src\main\java\com\saveur221\repository\ProduitRepositoryImpl.java
+C:\Users\user\Desktop\saveur221-java\src\main\java\com\saveur221\repository\UtilisateurRepositoryImpl.java
+C:\Users\user\Desktop\saveur221-java\src\main\java\com\saveur221\services\CategorieService.java
+C:\Users\user\Desktop\saveur221-java\src\main\java\com\saveur221\services\ProduitService.java

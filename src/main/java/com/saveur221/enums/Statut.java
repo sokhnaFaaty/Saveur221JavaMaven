@@ -7,7 +7,7 @@ public enum Statut {
     RETIREE,
     ANNULEE;
 
-    public boolean peutTransitionnerVers(statut cible){
+    public boolean peutTransitionnerVers(Statut cible){
         if(this == RETIREE || this == ANNULEE){
             return false;
         }

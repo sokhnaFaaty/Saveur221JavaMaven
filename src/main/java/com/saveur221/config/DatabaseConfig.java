@@ -20,7 +20,7 @@ public final class DatabaseConfig {
                     }
                     PROPS.load(in);
                 }catch(IOException e){
-                    throw new IllegalStateException("Erreur de la lecture de application.properties",e)
+                    throw new IllegalStateException("Erreur de la lecture de application.properties",e);
                 }
     }
 
@@ -28,7 +28,7 @@ public final class DatabaseConfig {
         //c;asse Utilitaire, non instanciable
     }
 
-    public static Connection getConnexion() throws SQLException{
+    public static Connection getConnection() throws SQLException{
         return DriverManager.getConnection(
             PROPS.getProperty("db.url"),            
             PROPS.getProperty("db.user"),
