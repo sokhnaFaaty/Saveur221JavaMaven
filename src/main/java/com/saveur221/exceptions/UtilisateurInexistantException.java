@@ -1,5 +1,10 @@
-package main.java.com.saveur221.exceptions;
+package com.saveur221.exceptions;
 
-public class UtilisateurInexistantException {
+import com.saveur221.exceptions.SaveurException;
+
+public class UtilisateurInexistantException extends SaveurException {
+    public UtilisateurInexistantException(String message) {
+        super(message);
+    }
     
 }
