@@ -3,7 +3,9 @@ package com.saveur221.services;
 import java.util.List;
 
 import com.saveur221.entities.Categorie;
+import com.saveur221.exceptions.CategorieInexistanteException;
 import com.saveur221.interfaces.CategorieRepositoryInterface;
+
 
 public class CategorieService {
     private final CategorieRepositoryInterface categorieRepository;
