@@ -1,5 +1,6 @@
-package main.java.com.saveur221.exceptions;
+package com.saveur221.exceptions;
 
-public class CommandeInexistanteException {
+public class CommandeInexistanteException extends RuntimeException {
+    
     
 }

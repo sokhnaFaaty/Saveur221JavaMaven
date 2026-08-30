@@ -5,7 +5,7 @@ import java.util.Optional;
 
 import com.saveur221.entities.Categorie;
 
-public class CategorieRepositoryInterface {
+public interface CategorieRepositoryInterface {
     Optional<Categorie> findById(Long id);
     List<Categorie> findAll();
     List<Categorie> search(String motCle);
