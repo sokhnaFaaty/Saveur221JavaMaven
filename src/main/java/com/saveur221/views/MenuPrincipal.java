@@ -59,7 +59,8 @@ public class MenuPrincipal{
         System.out.printf("%nBienvenue %s %s !%n", utilisateur.getPrenom(), utilisateur.getNom());
 
         if (authService.estAdmin(utilisateur)) {
-            new MenuAdmin(scanner, utilisateurService).afficher();
+            new MenuAdmin(scanner, categorieService, produitService, commandeService,
+                    paiementService, utilisateurService).afficher();
         } else if (authService.estGerant(utilisateur)) {
             new MenuGerant(scanner, categorieService, produitService, commandeService, paiementService)
                     .afficher();
