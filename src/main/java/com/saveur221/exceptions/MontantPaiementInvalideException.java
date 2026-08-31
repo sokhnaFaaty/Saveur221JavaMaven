@@ -1,5 +1,8 @@
-package main.java.com.saveur221.exceptions;
+package com.saveur221.exceptions;
 
-public class MontantPaiementInvalideException {
-    
+public class MontantPaiementInvalideException extends SaveurException{
+    public MontantPaiementInvalideException(String message) {
+        super(message);
+    }
+
 }
