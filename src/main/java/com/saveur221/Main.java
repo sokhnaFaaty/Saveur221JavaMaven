@@ -19,6 +19,7 @@ import com.saveur221.services.CategorieService;
 import com.saveur221.services.CommandeService;
 import com.saveur221.services.PaiementService;
 import com.saveur221.services.ProduitService;
+import com.saveur221.services.UtilisateurService;
 import com.saveur221.views.MenuPrincipal;
 
 public class Main {
@@ -45,10 +46,12 @@ public class Main {
         ProduitService produitService = new ProduitService(produitRepository, categorieRepository);
         CommandeService commandeService = new CommandeService(commandeRepository, produitService);
         PaiementService paiementService = new PaiementService(paiementRepository, commandeService);
+        UtilisateurService utilisateurService = new UtilisateurService(utilisateurRepository,
+                authService);
 
 
         new MenuPrincipal(authService, categorieService, produitService, commandeService,
-                paiementService).demarrer();
+                paiementService, utilisateurService).demarrer();
     }
 
 }
