@@ -1,5 +1,9 @@
-package main.java.com.saveur221.exceptions;
+package com.saveur221.exceptions;
 
-public class EmailDejaUtiliseException {
-    
+public class EmailDejaUtiliseException extends SaveurException {
+
+    public EmailDejaUtiliseException(String message) {
+        super(message);
+    }
+
 }
