@@ -15,7 +15,7 @@ import com.saveur221.entities.Commande;
 import com.saveur221.entities.LigneCommande;
 import com.saveur221.entities.Produit;
 import com.saveur221.enums.Statut;
-import com.saveur.interfaces.CommandeRepositoryInterface;
+import com.saveur221.interfaces.CommandeRepositoryInterface;
 
 public class CommandeRepositoryImpl implements CommandeRepositoryInterface{
     private static final String SELECT_BASE =

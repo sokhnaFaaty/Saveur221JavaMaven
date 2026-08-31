@@ -6,7 +6,7 @@ import java.util.Optional;
 import com.saveur221.entities.Commande;
 import com.saveur221.enums.Statut;
 
-public class CommandeRepositoryInterface {
+public interface CommandeRepositoryInterface {
     Optional<Commande> findById(Long id);
     List<Commande> findAll();
     List<Commande> findByStatut(Statut statut);
