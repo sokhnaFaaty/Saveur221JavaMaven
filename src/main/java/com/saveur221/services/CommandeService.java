@@ -26,10 +26,6 @@ public class CommandeService {
         return commandeRepository.findByStatut(statut);
     }
 
-    public List<Commande> listerParClient(Long clientId) {
-        return commandeRepository.findByClient(clientId);
-    }
-
     public Commande consulterCommande(Long id) {
         return commandeRepository.findById(id)
                 .orElseThrow(() -> new CommandeInexistanteException(

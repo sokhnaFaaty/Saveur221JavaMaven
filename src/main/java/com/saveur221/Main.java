@@ -5,13 +5,11 @@ import java.sql.SQLException;
 
 import com.saveur221.config.DatabaseConfig;
 import com.saveur221.interfaces.CategorieRepositoryInterface;
-import com.saveur221.interfaces.ClientRepositoryInterface;
 import com.saveur221.interfaces.CommandeRepositoryInterface;
 import com.saveur221.interfaces.PaiementRepositoryInterface;
 import com.saveur221.interfaces.ProduitRepositoryInterface;
 import com.saveur221.interfaces.UtilisateurRepositoryInterface;
 import com.saveur221.repository.CategorieRepositoryImpl;
-import com.saveur221.repository.ClientRepositoryImpl;
 import com.saveur221.repository.CommandeRepositoryImpl;
 import com.saveur221.repository.PaiementRepositoryImpl;
 import com.saveur221.repository.ProduitRepositoryImpl;
@@ -38,7 +36,6 @@ public class Main {
         UtilisateurRepositoryInterface utilisateurRepository = new UtilisateurRepositoryImpl();
         CategorieRepositoryInterface categorieRepository = new CategorieRepositoryImpl();
         ProduitRepositoryInterface produitRepository = new ProduitRepositoryImpl();
-        ClientRepositoryInterface clientRepository = new ClientRepositoryImpl();
         CommandeRepositoryInterface commandeRepository = new CommandeRepositoryImpl();
         PaiementRepositoryInterface paiementRepository = new PaiementRepositoryImpl();
 
@@ -46,12 +43,12 @@ public class Main {
         AuthService authService = new AuthService(utilisateurRepository);
         CategorieService categorieService = new CategorieService(categorieRepository);
         ProduitService produitService = new ProduitService(produitRepository, categorieRepository);
-        CommandeService commandeService = new CommandeService(commandeRepository, clientRepository,
-                produitRepository, produitService);
+        CommandeService commandeService = new CommandeService(commandeRepository, produitService);
         PaiementService paiementService = new PaiementService(paiementRepository, commandeService);
 
 
-        new MenuPrincipal(authService).demarrer();
+        new MenuPrincipal(authService, categorieService, produitService, commandeService,
+                paiementService).demarrer();
     }
 
 }

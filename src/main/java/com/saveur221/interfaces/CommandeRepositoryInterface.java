@@ -10,7 +10,6 @@ public interface CommandeRepositoryInterface {
     Optional<Commande> findById(Long id);
     List<Commande> findAll();
     List<Commande> findByStatut(Statut statut);
-    List<Commande> findByClient(Long clientId);
     Commande save(Commande commande);
     Commande update(Commande commande);
 

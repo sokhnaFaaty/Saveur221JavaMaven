@@ -13,7 +13,6 @@ public class Commande {
     private LocalDateTime dateCommande;
     private double total;
     private Statut statut;
-    private Client client;
     private List<LigneCommande> lignes;
 
     public Commande() {
@@ -21,13 +20,12 @@ public class Commande {
     }
 
     public Commande(Long id, String numCommande, LocalDateTime dateCommande, double total,
-            Statut statut, Client client) {
+            Statut statut) {
         this.id = id;
         this.numCommande = numCommande;
         this.dateCommande = dateCommande;
         this.total = total;
         this.statut = statut;
-        this.client = client;
         this.lignes = new ArrayList<>();
     }
 
@@ -86,14 +84,6 @@ public class Commande {
 
     public void setStatut(Statut statut) {
         this.statut = statut;
-    }
-
-    public Client getClient() {
-        return client;
-    }
-
-    public void setClient(Client client) {
-        this.client = client;
     }
 
     public List<LigneCommande> getLignes() {
