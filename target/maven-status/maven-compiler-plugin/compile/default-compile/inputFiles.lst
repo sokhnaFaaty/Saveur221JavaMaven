@@ -18,6 +18,7 @@ C:\Users\user\Desktop\saveur221-java\src\main\java\com\saveur221\exceptions\Comp
 C:\Users\user\Desktop\saveur221-java\src\main\java\com\saveur221\exceptions\EmailDejaUtiliseException.java
 C:\Users\user\Desktop\saveur221-java\src\main\java\com\saveur221\exceptions\MontantPaiementInvalideException.java
 C:\Users\user\Desktop\saveur221-java\src\main\java\com\saveur221\exceptions\MotDePasseIncorrectException.java
+C:\Users\user\Desktop\saveur221-java\src\main\java\com\saveur221\exceptions\PaiementInexistantException.java
 C:\Users\user\Desktop\saveur221-java\src\main\java\com\saveur221\exceptions\ProduitInexistantException.java
 C:\Users\user\Desktop\saveur221-java\src\main\java\com\saveur221\exceptions\SaveurException.java
 C:\Users\user\Desktop\saveur221-java\src\main\java\com\saveur221\exceptions\StockInsuffisantException.java
@@ -33,10 +34,12 @@ C:\Users\user\Desktop\saveur221-java\src\main\java\com\saveur221\Main.java
 C:\Users\user\Desktop\saveur221-java\src\main\java\com\saveur221\repository\CategorieRepositoryImpl.java
 C:\Users\user\Desktop\saveur221-java\src\main\java\com\saveur221\repository\ClientRepositoryImpl.java
 C:\Users\user\Desktop\saveur221-java\src\main\java\com\saveur221\repository\CommandeRepositoryImpl.java
+C:\Users\user\Desktop\saveur221-java\src\main\java\com\saveur221\repository\PaiementRepositoryImpl.java
 C:\Users\user\Desktop\saveur221-java\src\main\java\com\saveur221\repository\ProduitRepositoryImpl.java
 C:\Users\user\Desktop\saveur221-java\src\main\java\com\saveur221\repository\UtilisateurRepositoryImpl.java
 C:\Users\user\Desktop\saveur221-java\src\main\java\com\saveur221\services\AuthService.java
 C:\Users\user\Desktop\saveur221-java\src\main\java\com\saveur221\services\CategorieService.java
 C:\Users\user\Desktop\saveur221-java\src\main\java\com\saveur221\services\CommandeService.java
+C:\Users\user\Desktop\saveur221-java\src\main\java\com\saveur221\services\PaiementService.java
 C:\Users\user\Desktop\saveur221-java\src\main\java\com\saveur221\services\ProduitService.java
 C:\Users\user\Desktop\saveur221-java\src\main\java\com\saveur221\views\MenuPrincipal.java
