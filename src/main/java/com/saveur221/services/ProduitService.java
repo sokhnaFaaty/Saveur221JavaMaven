@@ -22,7 +22,7 @@ public class ProduitService {
     }
 
     public Produit ajouterProduit(String libelle, String description, double prix,
-                                   int quantiteStock, Long categorieId, String image, int seuilAlerte) {
+                                   int quantiteStock, Long categorieId, int tempsPreparation, int calories, String image, int seuilAlerte) {
         if (libelle == null || libelle.isBlank()) {
             throw new IllegalArgumentException("Le libelle du produit est obligatoire.");
         }
@@ -38,7 +38,7 @@ public class ProduitService {
                         "Aucune categorie trouvee avec l'id " + categorieId));
 
         Produit produit = new Produit(null, libelle, description, prix, quantiteStock,
-                categorie, image, seuilAlerte);
+                categorie, tempsPreparation, calories, image, seuilAlerte);
 
         return produitRepository.save(produit);
     }
@@ -64,7 +64,7 @@ public class ProduitService {
     }
 
     public Produit modifierProduit(Long id, String libelle, String description, double prix,
-                                    Long categorieId, String image, int seuilAlerte) {
+                                    Long categorieId,int tempsPreparation, int calories, String image, int seuilAlerte) {
         Produit produit = produitRepository.findById(id)
                 .orElseThrow(() -> new ProduitInexistantException(
                         "Aucun produit trouve avec l'id " + id));
@@ -77,6 +77,8 @@ public class ProduitService {
         produit.setDescription(description);
         produit.setPrix(prix);
         produit.setCategorie(categorie);
+        produit.setTempsPreparation(tempsPreparation);
+        produit.setCalories(calorie)
         produit.setImage(image);
         produit.setSeuilAlerte(seuilAlerte);
 
