@@ -78,7 +78,7 @@ public class ProduitService {
         produit.setPrix(prix);
         produit.setCategorie(categorie);
         produit.setTempsPreparation(tempsPreparation);
-        produit.setCalories(calorie);
+        produit.setCalories(calories);
         produit.setImage(image);
         produit.setSeuilAlerte(seuilAlerte);
 

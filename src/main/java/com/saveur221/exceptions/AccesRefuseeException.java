@@ -1,5 +1,8 @@
-package main.java.com.saveur221.exceptions;
+package com.saveur221.exceptions;
 
-public class AccesRefuseeException {
-    
+public class AccesRefuseeException extends SaveurException {
+    public AccesRefuseeException(String message) {
+        super(message);
+    }
+
 }
