@@ -52,7 +52,6 @@ public class CommandeView {
         Long id = lireId();
         Commande commande = commandeService.consulterCommande(id);
         System.out.println(commande);
-        System.out.println("Client : " + commande.getClient());
         for (LigneCommande ligne : commande.getLignes()) {
             System.out.println("  - " + ligne);
         }

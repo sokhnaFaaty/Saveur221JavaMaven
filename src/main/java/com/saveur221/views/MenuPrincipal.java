@@ -9,6 +9,7 @@ import com.saveur221.services.CategorieService;
 import com.saveur221.services.CommandeService;
 import com.saveur221.services.PaiementService;
 import com.saveur221.services.ProduitService;
+import com.saveur221.services.UtilisateurService;
 
 public class MenuPrincipal{
     private final AuthService authService;
@@ -16,16 +17,18 @@ public class MenuPrincipal{
     private final ProduitService produitService;
     private final CommandeService commandeService;
     private final PaiementService paiementService;
+    private final UtilisateurService utilisateurService;
     private final Scanner scanner;
 
     public MenuPrincipal(AuthService authService, CategorieService categorieService,
                           ProduitService produitService, CommandeService commandeService,
-                          PaiementService paiementService) {
+                          PaiementService paiementService, UtilisateurService utilisateurService) {
         this.authService = authService;
         this.categorieService = categorieService;
         this.produitService = produitService;
         this.commandeService = commandeService;
         this.paiementService = paiementService;
+        this.utilisateurService = utilisateurService;
         this.scanner = new Scanner(System.in);
     }
 
@@ -55,10 +58,14 @@ public class MenuPrincipal{
     private void afficherMenu(Utilisateur utilisateur) {
         System.out.printf("%nBienvenue %s %s !%n", utilisateur.getPrenom(), utilisateur.getNom());
 
-        
-        if (authService.estAdmin(utilisateur) || authService.estGerant(utilisateur)) {
+        if (authService.estAdmin(utilisateur)) {
+            new MenuAdmin(scanner, categorieService, produitService, commandeService,
+                    paiementService, utilisateurService).afficher();
+        } else if (authService.estGerant(utilisateur)) {
             new MenuGerant(scanner, categorieService, produitService, commandeService, paiementService)
                     .afficher();
+        } else {
+            System.out.println("Ce compte n'a pas les droits necessaires.");
         }
     }
 

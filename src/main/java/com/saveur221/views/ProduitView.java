@@ -49,7 +49,7 @@ public class ProduitView {
                     case "0" -> continuer = false;
                     default -> System.out.println("Choix invalide.");
                 }
-            } catch (SaveurException | IllegalArgumentException | NumberFormatException e) {
+            } catch (SaveurException | IllegalArgumentException e) {
                 System.out.println("Erreur : " + e.getMessage());
             }
         }

@@ -11,7 +11,6 @@ import java.util.Optional;
 
 import com.saveur221.config.DatabaseConfig;
 import com.saveur221.entities.Categorie;
-import com.saveur221.entities.Client;
 import com.saveur221.entities.Commande;
 import com.saveur221.entities.LigneCommande;
 import com.saveur221.entities.Produit;
@@ -20,9 +19,7 @@ import com.saveur221.interfaces.CommandeRepositoryInterface;
 
 public class CommandeRepositoryImpl implements CommandeRepositoryInterface{
     private static final String SELECT_BASE =
-        "SELECT co.*, cl.nom AS cl_nom, cl.prenom AS cl_prenom, " +
-        "cl.telephone AS cl_telephone, cl.email AS cl_email " +
-        "FROM commandes co JOIN clients cl ON co.client_id = cl.id ";
+        "SELECT co.* FROM commandes co ";
 
     private static final String SELECT_LIGNES =
         "SELECT lc.*, p.libelle AS p_libelle, p.description AS p_description, p.prix AS p_prix, " +
@@ -69,15 +66,9 @@ public class CommandeRepositoryImpl implements CommandeRepositoryInterface{
     }
 
     @Override
-    public List<Commande> findByClient(Long clientId) {
-        String sql = SELECT_BASE + "WHERE co.client_id = ? ORDER BY co.date_commande DESC";
-        return executerListe(sql, stmt -> stmt.setLong(1, clientId));
-    }
-
-    @Override
     public Commande save(Commande commande) {
-        String sqlCommande = "INSERT INTO commandes (num_commande, date_commande, total, statut, client_id) "
-                + "VALUES (?, ?, ?, ?, ?)";
+        String sqlCommande = "INSERT INTO commandes (num_commande, date_commande, total, statut) "
+                + "VALUES (?, ?, ?, ?)";
         String sqlLigne = "INSERT INTO ligne_commandes "
                 + "(quantite, prix_unitaire, sous_total, produit_id, commande_id, instructions_speciales) "
                 + "VALUES (?, ?, ?, ?, ?, ?)";
@@ -90,7 +81,6 @@ public class CommandeRepositoryImpl implements CommandeRepositoryInterface{
                 stmt.setObject(2, commande.getDateCommande());
                 stmt.setDouble(3, commande.getTotal());
                 stmt.setString(4, commande.getStatut().name());
-                stmt.setLong(5, commande.getClient().getId());
                 stmt.executeUpdate();
 
                 try (ResultSet keys = stmt.getGeneratedKeys()) {
@@ -206,20 +196,12 @@ public class CommandeRepositoryImpl implements CommandeRepositoryInterface{
     }
 
     private Commande hydrater(ResultSet rs) throws SQLException {
-        Client client = new Client(
-                rs.getLong("client_id"),
-                rs.getString("cl_nom"),
-                rs.getString("cl_prenom"),
-                rs.getString("cl_telephone"),
-                rs.getString("cl_email"));
-
         return new Commande(
                 rs.getLong("id"),
                 rs.getString("num_commande"),
                 rs.getTimestamp("date_commande").toLocalDateTime(),
                 rs.getDouble("total"),
-                Statut.valueOf(rs.getString("statut")),
-                client);
+                Statut.valueOf(rs.getString("statut")));
     }
 
 }
