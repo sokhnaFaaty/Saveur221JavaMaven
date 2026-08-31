@@ -11,6 +11,8 @@ public class Produit {
     private int quantiteStock;
     private Categorie categorie;
     private Etat disponible;
+    private int tempsPreparation;
+private int calories;
     private String image;
     private int seuilAlerte;
 
@@ -19,13 +21,16 @@ public class Produit {
     }
 
     public Produit(Long id, String libelle, String description, double prix, int quantiteStock,
-        Categorie categorie, String image, int seuilAlerte){
+        Categorie categorie, int tempsPreparation, int calories, String image, int seuilAlerte){
             this.id = id;
             this.libelle = libelle;
             this.description = description;
             this.prix = prix;
             this.quantiteStock = quantiteStock;
             this.categorie = categorie;
+            this.tempsPreparation = tempsPreparation;
+        this.calories = calories;
+
             this.image = image;
             this.seuilAlerte = seuilAlerte;
             ajusterDisponibilite();
@@ -117,7 +122,21 @@ public class Produit {
     public Etat getDisponible(){
         return disponible;
     }
+public int getTempsPreparation(){
+    return tempsPreparation;
+}
 
+public void setTempsPreparation(int tempsPreparation){
+    this.tempsPreparation = tempsPreparation;
+}
+
+public int getCalories(){
+    return calories;
+}
+
+public void setCalories(int calories){
+    this.calories = calories;
+}
     public String getImage(){
         return image;
     }
