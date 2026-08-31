@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 
 import com.saveur221.entities.Commande;
 import com.saveur221.entities.Paiement;
-import com.saveur221.enums.Etat;
+import com.saveur221.enums.StatutPaiement;
 import com.saveur221.exceptions.MontantPaiementInvalideException;
 import com.saveur221.interfaces.PaiementRepositoryInterface;
 

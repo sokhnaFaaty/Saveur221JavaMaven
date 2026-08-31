@@ -10,7 +10,7 @@ import com.saveur221.config.DatabaseConfig;
 import com.saveur221.entities.Client;
 import com.saveur221.interfaces.ClientRepositoryInterface;
 
-public class ClientRepositoryImpl implements ClientRepositoryInterface{
+public class ClientRepositoryImpl implements ClientRepositoryInterface {
     @Override
     public Optional<Client> findById(Long id) {
         String sql = "SELECT * FROM clients WHERE id = ? AND deleted_at IS NULL";

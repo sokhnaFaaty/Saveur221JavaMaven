@@ -4,9 +4,23 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 import com.saveur221.config.DatabaseConfig;
+import com.saveur221.interfaces.CategorieRepositoryInterface;
+import com.saveur221.interfaces.ClientRepositoryInterface;
+import com.saveur221.interfaces.CommandeRepositoryInterface;
+import com.saveur221.interfaces.PaiementRepositoryInterface;
+import com.saveur221.interfaces.ProduitRepositoryInterface;
 import com.saveur221.interfaces.UtilisateurRepositoryInterface;
+import com.saveur221.repository.CategorieRepositoryImpl;
+import com.saveur221.repository.ClientRepositoryImpl;
+import com.saveur221.repository.CommandeRepositoryImpl;
+import com.saveur221.repository.PaiementRepositoryImpl;
+import com.saveur221.repository.ProduitRepositoryImpl;
 import com.saveur221.repository.UtilisateurRepositoryImpl;
 import com.saveur221.services.AuthService;
+import com.saveur221.services.CategorieService;
+import com.saveur221.services.CommandeService;
+import com.saveur221.services.PaiementService;
+import com.saveur221.services.ProduitService;
 import com.saveur221.views.MenuPrincipal;
 
 public class Main {
@@ -22,7 +36,20 @@ public class Main {
         }
 
         UtilisateurRepositoryInterface utilisateurRepository = new UtilisateurRepositoryImpl();
+        CategorieRepositoryInterface categorieRepository = new CategorieRepositoryImpl();
+        ProduitRepositoryInterface produitRepository = new ProduitRepositoryImpl();
+        ClientRepositoryInterface clientRepository = new ClientRepositoryImpl();
+        CommandeRepositoryInterface commandeRepository = new CommandeRepositoryImpl();
+        PaiementRepositoryInterface paiementRepository = new PaiementRepositoryImpl();
+
+
         AuthService authService = new AuthService(utilisateurRepository);
+        CategorieService categorieService = new CategorieService(categorieRepository);
+        ProduitService produitService = new ProduitService(produitRepository, categorieRepository);
+        CommandeService commandeService = new CommandeService(commandeRepository, clientRepository,
+                produitRepository, produitService);
+        PaiementService paiementService = new PaiementService(paiementRepository, commandeService);
+
 
         new MenuPrincipal(authService).demarrer();
     }

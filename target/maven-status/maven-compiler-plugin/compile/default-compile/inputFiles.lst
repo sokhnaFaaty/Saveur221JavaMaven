@@ -9,6 +9,7 @@ C:\Users\user\Desktop\saveur221-java\src\main\java\com\saveur221\entities\Utilis
 C:\Users\user\Desktop\saveur221-java\src\main\java\com\saveur221\enums\Etat.java
 C:\Users\user\Desktop\saveur221-java\src\main\java\com\saveur221\enums\Role.java
 C:\Users\user\Desktop\saveur221-java\src\main\java\com\saveur221\enums\Statut.java
+C:\Users\user\Desktop\saveur221-java\src\main\java\com\saveur221\enums\StatutPaiement.java
 C:\Users\user\Desktop\saveur221-java\src\main\java\com\saveur221\exceptions\AccesRefuseeException.java
 C:\Users\user\Desktop\saveur221-java\src\main\java\com\saveur221\exceptions\CategorieInexistanteException.java
 C:\Users\user\Desktop\saveur221-java\src\main\java\com\saveur221\exceptions\CategorieNonSupprimableException.java
@@ -42,4 +43,9 @@ C:\Users\user\Desktop\saveur221-java\src\main\java\com\saveur221\services\Catego
 C:\Users\user\Desktop\saveur221-java\src\main\java\com\saveur221\services\CommandeService.java
 C:\Users\user\Desktop\saveur221-java\src\main\java\com\saveur221\services\PaiementService.java
 C:\Users\user\Desktop\saveur221-java\src\main\java\com\saveur221\services\ProduitService.java
+C:\Users\user\Desktop\saveur221-java\src\main\java\com\saveur221\views\CategorieView.java
+C:\Users\user\Desktop\saveur221-java\src\main\java\com\saveur221\views\CommandeView.java
+C:\Users\user\Desktop\saveur221-java\src\main\java\com\saveur221\views\MenuGerant.java
 C:\Users\user\Desktop\saveur221-java\src\main\java\com\saveur221\views\MenuPrincipal.java
+C:\Users\user\Desktop\saveur221-java\src\main\java\com\saveur221\views\PaiementView.java
+C:\Users\user\Desktop\saveur221-java\src\main\java\com\saveur221\views\ProduitView.java

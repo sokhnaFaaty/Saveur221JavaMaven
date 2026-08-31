@@ -4,7 +4,7 @@ import java.util.Optional;
 
 import com.saveur221.entities.Client;
 
-public class ClientRepositoryInterface {
+public interface ClientRepositoryInterface {
     Optional<Client> findById(Long id);
 
 }
