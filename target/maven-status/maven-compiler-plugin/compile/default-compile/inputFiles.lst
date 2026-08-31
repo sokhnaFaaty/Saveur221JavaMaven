@@ -1,6 +1,5 @@
 C:\Users\user\Desktop\saveur221-java\src\main\java\com\saveur221\config\DatabaseConfig.java
 C:\Users\user\Desktop\saveur221-java\src\main\java\com\saveur221\entities\Categorie.java
-C:\Users\user\Desktop\saveur221-java\src\main\java\com\saveur221\entities\Client.java
 C:\Users\user\Desktop\saveur221-java\src\main\java\com\saveur221\entities\Commande.java
 C:\Users\user\Desktop\saveur221-java\src\main\java\com\saveur221\entities\LigneCommande.java
 C:\Users\user\Desktop\saveur221-java\src\main\java\com\saveur221\entities\Paiement.java
@@ -12,7 +11,6 @@ C:\Users\user\Desktop\saveur221-java\src\main\java\com\saveur221\enums\Statut.ja
 C:\Users\user\Desktop\saveur221-java\src\main\java\com\saveur221\exceptions\AccesRefuseeException.java
 C:\Users\user\Desktop\saveur221-java\src\main\java\com\saveur221\exceptions\CategorieInexistanteException.java
 C:\Users\user\Desktop\saveur221-java\src\main\java\com\saveur221\exceptions\CategorieNonSupprimableException.java
-C:\Users\user\Desktop\saveur221-java\src\main\java\com\saveur221\exceptions\ClientInexistantException.java
 C:\Users\user\Desktop\saveur221-java\src\main\java\com\saveur221\exceptions\CommandeInexistanteException.java
 C:\Users\user\Desktop\saveur221-java\src\main\java\com\saveur221\exceptions\CompteDesactiveException.java
 C:\Users\user\Desktop\saveur221-java\src\main\java\com\saveur221\exceptions\EmailDejaUtiliseException.java
@@ -25,14 +23,12 @@ C:\Users\user\Desktop\saveur221-java\src\main\java\com\saveur221\exceptions\Stoc
 C:\Users\user\Desktop\saveur221-java\src\main\java\com\saveur221\exceptions\TransitionStatutInvalideException.java
 C:\Users\user\Desktop\saveur221-java\src\main\java\com\saveur221\exceptions\UtilisateurInexistantException.java
 C:\Users\user\Desktop\saveur221-java\src\main\java\com\saveur221\interfaces\CategorieRepositoryInterface.java
-C:\Users\user\Desktop\saveur221-java\src\main\java\com\saveur221\interfaces\ClientRepositoryInterface.java
 C:\Users\user\Desktop\saveur221-java\src\main\java\com\saveur221\interfaces\CommandeRepositoryInterface.java
 C:\Users\user\Desktop\saveur221-java\src\main\java\com\saveur221\interfaces\PaiementRepositoryInterface.java
 C:\Users\user\Desktop\saveur221-java\src\main\java\com\saveur221\interfaces\ProduitRepositoryInterface.java
 C:\Users\user\Desktop\saveur221-java\src\main\java\com\saveur221\interfaces\UtilisateurRepositoryInterface.java
 C:\Users\user\Desktop\saveur221-java\src\main\java\com\saveur221\Main.java
 C:\Users\user\Desktop\saveur221-java\src\main\java\com\saveur221\repository\CategorieRepositoryImpl.java
-C:\Users\user\Desktop\saveur221-java\src\main\java\com\saveur221\repository\ClientRepositoryImpl.java
 C:\Users\user\Desktop\saveur221-java\src\main\java\com\saveur221\repository\CommandeRepositoryImpl.java
 C:\Users\user\Desktop\saveur221-java\src\main\java\com\saveur221\repository\PaiementRepositoryImpl.java
 C:\Users\user\Desktop\saveur221-java\src\main\java\com\saveur221\repository\ProduitRepositoryImpl.java
