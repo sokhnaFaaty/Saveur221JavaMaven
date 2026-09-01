@@ -9,6 +9,7 @@ import com.saveur221.services.CategorieService;
 import com.saveur221.services.CommandeService;
 import com.saveur221.services.PaiementService;
 import com.saveur221.services.ProduitService;
+import com.saveur221.services.StatistiqueService;
 import com.saveur221.services.UtilisateurService;
 
 public class MenuPrincipal{
@@ -17,17 +18,20 @@ public class MenuPrincipal{
     private final ProduitService produitService;
     private final CommandeService commandeService;
     private final PaiementService paiementService;
+    private final StatistiqueService statistiqueService;
     private final UtilisateurService utilisateurService;
     private final Scanner scanner;
 
     public MenuPrincipal(AuthService authService, CategorieService categorieService,
                           ProduitService produitService, CommandeService commandeService,
-                          PaiementService paiementService, UtilisateurService utilisateurService) {
+                          PaiementService paiementService, StatistiqueService statistiqueService,
+                          UtilisateurService utilisateurService) {
         this.authService = authService;
         this.categorieService = categorieService;
         this.produitService = produitService;
         this.commandeService = commandeService;
         this.paiementService = paiementService;
+        this.statistiqueService = statistiqueService;
         this.utilisateurService = utilisateurService;
         this.scanner = new Scanner(System.in);
     }
@@ -60,10 +64,10 @@ public class MenuPrincipal{
 
         if (authService.estAdmin(utilisateur)) {
             new MenuAdmin(scanner, categorieService, produitService, commandeService,
-                    paiementService, utilisateurService).afficher();
+                    paiementService, statistiqueService, utilisateurService).afficher();
         } else if (authService.estGerant(utilisateur)) {
-            new MenuGerant(scanner, categorieService, produitService, commandeService, paiementService)
-                    .afficher();
+            new MenuGerant(scanner, categorieService, produitService, commandeService,
+                    paiementService, statistiqueService).afficher();
         } else {
             System.out.println("Ce compte n'a pas les droits necessaires.");
         }
