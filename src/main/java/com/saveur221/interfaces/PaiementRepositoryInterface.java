@@ -7,6 +7,7 @@ import com.saveur221.entities.Paiement;
 
 public interface PaiementRepositoryInterface {
     Optional<Paiement> findById(Long id);
+    List<Paiement> findAll();
     List<Paiement> findByCommande(Long commandeId);
     double sommePaiements(Long commandeId);
     Paiement save(Paiement paiement);

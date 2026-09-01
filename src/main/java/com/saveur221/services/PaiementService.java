@@ -42,6 +42,10 @@ public class PaiementService {
         return paiementRepository.findByCommande(commandeId);
     }
 
+    public List<Paiement> listerTousLesPaiements() {
+        return paiementRepository.findAll();
+    }
+
     public double montantRestant(Long commandeId) {
         Commande commande = commandeService.consulterCommande(commandeId);
         double dejaPaye = paiementRepository.sommePaiements(commandeId);
