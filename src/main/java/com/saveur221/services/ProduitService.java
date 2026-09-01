@@ -1,9 +1,11 @@
 package com.saveur221.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.saveur221.entities.Categorie;
 import com.saveur221.entities.Produit;
+import com.saveur221.enums.Etat;
 import com.saveur221.exceptions.ProduitInexistantException;
 import com.saveur221.interfaces.CategorieRepositoryInterface;
 import com.saveur221.exceptions.CategorieInexistanteException;
@@ -63,6 +65,28 @@ public class ProduitService {
         return produitRepository.findStockFaible();
     }
 
+    // Produits disponibles (stock > 0)
+    public List<Produit> listerProduitsDisponibles() {
+        List<Produit> resultat = new ArrayList<>();
+        for (Produit p : listerProduits()) {
+            if (p.getDisponible() == Etat.DISPONIBLE) {
+                resultat.add(p);
+            }
+        }
+        return resultat;
+    }
+
+    // Produits indisponibles (stock = 0)
+    public List<Produit> listerProduitsIndisponibles() {
+        List<Produit> resultat = new ArrayList<>();
+        for (Produit p : listerProduits()) {
+            if (p.getDisponible() == Etat.NON_DISPONIBLE) {
+                resultat.add(p);
+            }
+        }
+        return resultat;
+    }
+
     public Produit modifierProduit(Long id, String libelle, String description, double prix,
                                     Long categorieId,int tempsPreparation, int calories, String image, int seuilAlerte) {
         Produit produit = produitRepository.findById(id)
@@ -78,7 +102,7 @@ public class ProduitService {
         produit.setPrix(prix);
         produit.setCategorie(categorie);
         produit.setTempsPreparation(tempsPreparation);
-        produit.setCalories(calorie)
+        produit.setCalories(calories);
         produit.setImage(image);
         produit.setSeuilAlerte(seuilAlerte);
 

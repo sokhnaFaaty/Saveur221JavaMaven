@@ -1,5 +1,16 @@
-package main.java.com.saveur221.interfaces;
+package com.saveur221.interfaces;
 
-public class CommandeRepositoryInterface {
-    
+import java.util.List;
+import java.util.Optional;
+
+import com.saveur221.entities.Commande;
+import com.saveur221.enums.Statut;
+
+public interface CommandeRepositoryInterface {
+    Optional<Commande> findById(Long id);
+    List<Commande> findAll();
+    List<Commande> findByStatut(Statut statut);
+    Commande save(Commande commande);
+    Commande update(Commande commande);
+
 }
