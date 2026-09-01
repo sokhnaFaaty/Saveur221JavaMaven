@@ -30,6 +30,8 @@ public class ProduitView {
             System.out.println("8. Definir seuil d'alerte");
             System.out.println("9. Produits en rupture");
             System.out.println("10. Produits en stock faible");
+            System.out.println("11. Produits disponibles");
+            System.out.println("12. Produits indisponibles");
             System.out.println("0. Retour");
             System.out.print("Choix : ");
             String choix = scanner.nextLine().trim();
@@ -46,6 +48,8 @@ public class ProduitView {
                     case "8" -> definirSeuil();
                     case "9" -> afficherListe(produitService.listerProduitsEnRupture());
                     case "10" -> afficherListe(produitService.listerProduitsStockFaible());
+                    case "11" -> afficherListe(produitService.listerProduitsDisponibles());
+                    case "12" -> afficherListe(produitService.listerProduitsIndisponibles());
                     case "0" -> continuer = false;
                     default -> System.out.println("Choix invalide.");
                 }
