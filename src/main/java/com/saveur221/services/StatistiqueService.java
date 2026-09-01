@@ -2,6 +2,7 @@ package com.saveur221.services;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -54,6 +55,17 @@ public class StatistiqueService {
                         || c.getStatut() == Statut.EN_PREPARATION
                         || c.getStatut() == Statut.PRETE)
                 .count();
+    }
+
+    // Liste les commandes ayant un statut precise (EN_ATTENTE, EN_PREPARATION, PRETE, RETIREE, ANNULEE)
+    public List<Commande> listerCommandesParStatut(Statut statut) {
+        List<Commande> resultat = new ArrayList<>();
+        for (Commande commande : commandeRepository.findAll()) {
+            if (commande.getStatut() == statut) {
+                resultat.add(commande);
+            }
+        }
+        return resultat;
     }
 
     public Produit produitLePlusVendu() {
