@@ -27,6 +27,7 @@ public class PaiementView {
             System.out.println("3. Voir le montant restant d'une commande");
             System.out.println("4. Commandes impayees");
             System.out.println("5. Commandes partiellement payees");
+            System.out.println("6. Historique de tous les paiements");
             System.out.println("0. Retour");
             System.out.print("Choix : ");
             String choix = scanner.nextLine().trim();
@@ -38,6 +39,7 @@ public class PaiementView {
                     case "3" -> montantRestant();
                     case "4" -> afficherListe(paiementService.listerCommandesImpayees());
                     case "5" -> afficherListe(paiementService.listerCommandesPartiellementPayees());
+                    case "6" -> afficherPaiements(paiementService.listerTousLesPaiements());
                     case "0" -> continuer = false;
                     default -> System.out.println("Choix invalide.");
                 }
@@ -80,6 +82,14 @@ public class PaiementView {
             return;
         }
         commandes.forEach(System.out::println);
+    }
+
+    private void afficherPaiements(List<Paiement> paiements) {
+        if (paiements.isEmpty()) {
+            System.out.println("Aucun paiement enregistre.");
+            return;
+        }
+        paiements.forEach(System.out::println);
     }
 
     private Long lireId() {

@@ -32,6 +32,25 @@ public class PaiementRepositoryImpl implements PaiementRepositoryInterface {
     }
 
     @Override
+    public List<Paiement> findAll() {
+        String sql = "SELECT * FROM paiements ORDER BY date_paiement";
+        List<Paiement> resultat = new ArrayList<>();
+
+        try (Connection conn = DatabaseConfig.getConnection();
+                PreparedStatement stmt = conn.prepareStatement(sql);
+                ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+                resultat.add(hydrater(rs));
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Erreur findAll : " + e.getMessage(), e);
+        }
+        return resultat;
+    }
+
+    @Override
     public List<Paiement> findByCommande(Long commandeId) {
         String sql = "SELECT * FROM paiements WHERE commande_id = ? ORDER BY date_paiement";
         List<Paiement> resultat = new ArrayList<>();

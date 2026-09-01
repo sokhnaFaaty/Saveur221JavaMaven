@@ -1,9 +1,12 @@
 package com.saveur221.views;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
+import com.saveur221.entities.Commande;
 import com.saveur221.entities.Produit;
+import com.saveur221.enums.Statut;
 import com.saveur221.services.StatistiqueService;
 
 public class StatistiqueView {
@@ -47,6 +50,12 @@ public class StatistiqueView {
                 String libelle = produit != null ? produit.getLibelle() : "?";
                 System.out.printf("  %d. %s (%d vendus)%n", rang++, libelle, entree.getValue());
             }
+        }
+        System.out.println();
+        System.out.println("Commandes par statut :");
+        for (Statut statut : Statut.values()) {
+            List<Commande> commandes = statistiqueService.listerCommandesParStatut(statut);
+            System.out.printf("  %-15s : %d%n", statut, commandes.size());
         }
         System.out.println();
         System.out.println("Appuyez sur Entree pour continuer...");
