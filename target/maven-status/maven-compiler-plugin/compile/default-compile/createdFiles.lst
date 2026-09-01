@@ -2,6 +2,7 @@ com\saveur221\exceptions\StockInsuffisantException.class
 com\saveur221\repository\CommandeRepositoryImpl$Parametreur.class
 com\saveur221\exceptions\SaveurException.class
 com\saveur221\interfaces\ProduitRepositoryInterface.class
+com\saveur221\views\StatistiqueView.class
 com\saveur221\exceptions\TransitionStatutInvalideException.class
 com\saveur221\repository\ProduitRepositoryImpl$Parametreur.class
 com\saveur221\services\PaiementService.class
@@ -47,6 +48,7 @@ com\saveur221\enums\Statut.class
 com\saveur221\exceptions\MotDePasseIncorrectException.class
 com\saveur221\interfaces\CategorieRepositoryInterface.class
 com\saveur221\entities\Categorie.class
+com\saveur221\services\StatistiqueService.class
 com\saveur221\exceptions\AccesRefuseeException.class
 com\saveur221\entities\Commande.class
 com\saveur221\entities\Produit.class
