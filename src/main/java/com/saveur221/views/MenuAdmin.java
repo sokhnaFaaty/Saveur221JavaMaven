@@ -6,6 +6,7 @@ import com.saveur221.services.CategorieService;
 import com.saveur221.services.CommandeService;
 import com.saveur221.services.PaiementService;
 import com.saveur221.services.ProduitService;
+import com.saveur221.services.StatistiqueService;
 import com.saveur221.services.UtilisateurService;
 
 public class MenuAdmin {
@@ -15,10 +16,11 @@ public class MenuAdmin {
 
     public MenuAdmin(Scanner scanner, CategorieService categorieService,
                      ProduitService produitService, CommandeService commandeService,
-                     PaiementService paiementService, UtilisateurService utilisateurService) {
+                     PaiementService paiementService, StatistiqueService statistiqueService,
+                     UtilisateurService utilisateurService) {
         this.scanner = scanner;
         this.menuGerant = new MenuGerant(scanner, categorieService, produitService,
-                commandeService, paiementService);
+                commandeService, paiementService, statistiqueService);
         this.utilisateurView = new UtilisateurView(scanner, utilisateurService);
     }
 
