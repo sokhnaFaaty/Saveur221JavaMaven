@@ -1,5 +1,10 @@
-package main.java.com.saveur221.exceptions;
+package com.saveur221.exceptions;
 
-public class CompteDesactiveException {
-    
+import com.saveur221.exceptions.SaveurException;
+
+public class CompteDesactiveException extends SaveurException {
+    public CompteDesactiveException(String message) {
+        super(message);
+    }
+
 }

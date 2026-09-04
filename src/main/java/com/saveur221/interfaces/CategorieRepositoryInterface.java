@@ -1,5 +1,18 @@
-package main.java.com.saveur221.interfaces;
+package com.saveur221.interfaces;
 
-public class CategorieRepositoryInterface {
-    
+import java.util.List;
+import java.util.Optional;
+
+import com.saveur221.entities.Categorie;
+
+public interface CategorieRepositoryInterface {
+    Optional<Categorie> findById(Long id);
+    Optional<Categorie> findByLibelle(String libelle);
+    List<Categorie> findAll();
+    List<Categorie> search(String motCle);
+    boolean contientDesProduits(Long categorieId);
+    Categorie save(Categorie categorie);
+    Categorie update(Categorie categorie);
+    void delete(Long id);
 }
+

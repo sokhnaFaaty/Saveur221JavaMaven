@@ -1,5 +1,6 @@
-package main.java.com.saveur221.enums;
+package com.saveur221.enums;
 
-public class Etat {
-    
+public enum Etat {
+    DISPONIBLE,
+    NON_DISPONIBLE
 }

@@ -1,5 +1,10 @@
-package main.java.com.saveur221.exceptions;
+package com.saveur221.exceptions;
 
-public class ProduitInexistantException {
-    
+import com.saveur221.exceptions.SaveurException;
+
+public class ProduitInexistantException extends SaveurException {
+    public ProduitInexistantException(String message) {
+        super(message);
+
+}
 }
