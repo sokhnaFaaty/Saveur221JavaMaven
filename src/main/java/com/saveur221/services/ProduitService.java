@@ -28,6 +28,9 @@ public class ProduitService {
         if (libelle == null || libelle.isBlank()) {
             throw new IllegalArgumentException("Le libelle du produit est obligatoire.");
         }
+        if (produitRepository.findByLibelle(libelle).isPresent()) {
+            throw new IllegalArgumentException("Un produit avec ce libelle existe deja.");
+        }
         if (prix < 0) {
             throw new IllegalArgumentException("Le prix ne peut pas etre negatif.");
         }
@@ -96,6 +99,12 @@ public class ProduitService {
         Categorie categorie = categorieRepository.findById(categorieId)
                 .orElseThrow(() -> new CategorieInexistanteException(
                         "Aucune categorie trouvee avec l'id " + categorieId));
+
+        if (produitRepository.findByLibelle(libelle)
+                .filter(p -> !p.getId().equals(id))
+                .isPresent()) {
+            throw new IllegalArgumentException("Un produit avec ce libelle existe deja.");
+        }
 
         produit.setLibelle(libelle);
         produit.setDescription(description);

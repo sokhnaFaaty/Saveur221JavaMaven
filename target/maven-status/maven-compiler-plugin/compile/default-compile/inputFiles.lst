@@ -15,6 +15,7 @@ C:\Users\user\Desktop\saveur221-java\src\main\java\com\saveur221\exceptions\Cate
 C:\Users\user\Desktop\saveur221-java\src\main\java\com\saveur221\exceptions\CommandeInexistanteException.java
 C:\Users\user\Desktop\saveur221-java\src\main\java\com\saveur221\exceptions\CompteDesactiveException.java
 C:\Users\user\Desktop\saveur221-java\src\main\java\com\saveur221\exceptions\EmailDejaUtiliseException.java
+C:\Users\user\Desktop\saveur221-java\src\main\java\com\saveur221\exceptions\LibelleDejaUtiliseException.java
 C:\Users\user\Desktop\saveur221-java\src\main\java\com\saveur221\exceptions\MontantPaiementInvalideException.java
 C:\Users\user\Desktop\saveur221-java\src\main\java\com\saveur221\exceptions\MotDePasseIncorrectException.java
 C:\Users\user\Desktop\saveur221-java\src\main\java\com\saveur221\exceptions\PaiementInexistantException.java

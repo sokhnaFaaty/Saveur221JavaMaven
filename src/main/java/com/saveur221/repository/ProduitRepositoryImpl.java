@@ -43,6 +43,23 @@ public class ProduitRepositoryImpl implements ProduitRepositoryInterface {
     }
 
     @Override
+    public Optional<Produit> findByLibelle(String libelle) {
+        String sql = SELECT_BASE + "WHERE p.libelle = ?" + NON_SUPPRIME;
+        try (Connection conn = DatabaseConfig.getConnection();
+                PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, libelle);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                return rs.next() ? Optional.of(hydrater(rs)) : Optional.empty();
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Erreur findByLibelle : " + e.getMessage(), e);
+        }
+    }
+
+    @Override
     public List<Produit> findAll() {
         String sql = SELECT_BASE + "WHERE p.deleted_at IS NULL ORDER BY p.libelle";
         return executerListe(sql, stmt -> {
