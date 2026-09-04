@@ -11,6 +11,9 @@ public interface UtilisateurRepositoryInterface {
     
     // Trouver un utilisateur avec son email
     Optional<Utilisateur> findByEmail(String email);
+
+    // Trouver un utilisateur avec son telephone
+    Optional<Utilisateur> findByTelephone(String telephone);
     
     // Lister tous les utilisateurs
     List<Utilisateur> findAll();

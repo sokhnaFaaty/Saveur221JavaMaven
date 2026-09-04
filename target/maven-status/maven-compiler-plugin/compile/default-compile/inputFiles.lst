@@ -22,6 +22,7 @@ C:\Users\user\Desktop\saveur221-java\src\main\java\com\saveur221\exceptions\Paie
 C:\Users\user\Desktop\saveur221-java\src\main\java\com\saveur221\exceptions\ProduitInexistantException.java
 C:\Users\user\Desktop\saveur221-java\src\main\java\com\saveur221\exceptions\SaveurException.java
 C:\Users\user\Desktop\saveur221-java\src\main\java\com\saveur221\exceptions\StockInsuffisantException.java
+C:\Users\user\Desktop\saveur221-java\src\main\java\com\saveur221\exceptions\TelephoneDejaUtiliseException.java
 C:\Users\user\Desktop\saveur221-java\src\main\java\com\saveur221\exceptions\TransitionStatutInvalideException.java
 C:\Users\user\Desktop\saveur221-java\src\main\java\com\saveur221\exceptions\UtilisateurInexistantException.java
 C:\Users\user\Desktop\saveur221-java\src\main\java\com\saveur221\interfaces\CategorieRepositoryInterface.java

@@ -73,8 +73,11 @@ public class Utilisateur {
     }
     
     public void setTelephone(String telephone){
-        
-    if (telephone != null && !telephone.matches(REGEX_TELEPHONE)) {
+
+    if (telephone == null || telephone.isBlank()) {
+            throw new IllegalArgumentException("Le numero de telephone est obligatoire.");
+        }
+    if (!telephone.matches(REGEX_TELEPHONE)) {
             throw new IllegalArgumentException("Numero de telephone invalide (Senegal ou Gambie).");
         }
         this.telephone = telephone;
