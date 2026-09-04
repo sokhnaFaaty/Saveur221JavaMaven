@@ -16,7 +16,7 @@ CREATE TABLE utilisateurs (
     prenom VARCHAR(100) NOT NULL,
     email VARCHAR(150) NOT NULL UNIQUE,
     mot_de_passe VARCHAR(255) NOT NULL,
-    telephone VARCHAR(20),
+    telephone VARCHAR(20) NOT NULL UNIQUE,
     role VARCHAR(20) NOT NULL CHECK (role IN ('ADMIN', 'GERANT')),
     actif BOOLEAN NOT NULL DEFAULT true,
     image VARCHAR(255),
@@ -30,7 +30,7 @@ CREATE TABLE clients (
     id SERIAL PRIMARY KEY,
     nom VARCHAR(100) NOT NULL,
     prenom VARCHAR(100) NOT NULL,
-    telephone VARCHAR(20),
+    telephone VARCHAR(20) NOT NULL UNIQUE,
     adresse VARCHAR(255),
     email VARCHAR(150) NOT NULL UNIQUE,
     mot_de_passe VARCHAR(255) NOT NULL,
@@ -43,7 +43,7 @@ CREATE TABLE clients (
 -- ============================================================
 CREATE TABLE categories (
     id SERIAL PRIMARY KEY,
-    libelle VARCHAR(100) NOT NULL,
+    libelle VARCHAR(100) NOT NULL UNIQUE,
     description TEXT,
     deleted_at TIMESTAMP NULL
 );
@@ -55,7 +55,7 @@ CREATE TABLE categories (
 -- ============================================================
 CREATE TABLE produits (
     id SERIAL PRIMARY KEY,
-    libelle VARCHAR(150) NOT NULL,
+    libelle VARCHAR(150) NOT NULL UNIQUE,
     description TEXT,
     prix NUMERIC(10,2) NOT NULL,
     quantite_stock INTEGER NOT NULL DEFAULT 0,

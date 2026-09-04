@@ -41,6 +41,27 @@ public class UtilisateurRepositoryImpl implements UtilisateurRepositoryInterface
     }
 
     @Override
+    public Optional<Utilisateur> findByTelephone(String telephone) {
+        String sql = "SELECT * FROM utilisateurs WHERE telephone = ?" + NON_SUPPRIME;
+
+        try (Connection conn = DatabaseConfig.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, telephone);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    return Optional.of(hydrater(rs));
+                }
+                return Optional.empty();
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Erreur findByTelephone : " + e.getMessage(), e);
+        }
+    }
+
+    @Override
     public Optional<Utilisateur> findById(Long id) {
         String sql = "SELECT * FROM utilisateurs WHERE id = ?" + NON_SUPPRIME;
         try (Connection conn = DatabaseConfig.getConnection();

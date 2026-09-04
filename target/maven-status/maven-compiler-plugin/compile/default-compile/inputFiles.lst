@@ -15,12 +15,14 @@ C:\Users\user\Desktop\saveur221-java\src\main\java\com\saveur221\exceptions\Cate
 C:\Users\user\Desktop\saveur221-java\src\main\java\com\saveur221\exceptions\CommandeInexistanteException.java
 C:\Users\user\Desktop\saveur221-java\src\main\java\com\saveur221\exceptions\CompteDesactiveException.java
 C:\Users\user\Desktop\saveur221-java\src\main\java\com\saveur221\exceptions\EmailDejaUtiliseException.java
+C:\Users\user\Desktop\saveur221-java\src\main\java\com\saveur221\exceptions\LibelleDejaUtiliseException.java
 C:\Users\user\Desktop\saveur221-java\src\main\java\com\saveur221\exceptions\MontantPaiementInvalideException.java
 C:\Users\user\Desktop\saveur221-java\src\main\java\com\saveur221\exceptions\MotDePasseIncorrectException.java
 C:\Users\user\Desktop\saveur221-java\src\main\java\com\saveur221\exceptions\PaiementInexistantException.java
 C:\Users\user\Desktop\saveur221-java\src\main\java\com\saveur221\exceptions\ProduitInexistantException.java
 C:\Users\user\Desktop\saveur221-java\src\main\java\com\saveur221\exceptions\SaveurException.java
 C:\Users\user\Desktop\saveur221-java\src\main\java\com\saveur221\exceptions\StockInsuffisantException.java
+C:\Users\user\Desktop\saveur221-java\src\main\java\com\saveur221\exceptions\TelephoneDejaUtiliseException.java
 C:\Users\user\Desktop\saveur221-java\src\main\java\com\saveur221\exceptions\TransitionStatutInvalideException.java
 C:\Users\user\Desktop\saveur221-java\src\main\java\com\saveur221\exceptions\UtilisateurInexistantException.java
 C:\Users\user\Desktop\saveur221-java\src\main\java\com\saveur221\interfaces\CategorieRepositoryInterface.java

@@ -6,6 +6,7 @@ import java.util.Optional;
 import com.saveur221.entities.Utilisateur;
 import com.saveur221.enums.Role;
 import com.saveur221.exceptions.EmailDejaUtiliseException;
+import com.saveur221.exceptions.TelephoneDejaUtiliseException;
 import com.saveur221.exceptions.UtilisateurInexistantException;
 import com.saveur221.interfaces.UtilisateurRepositoryInterface;
 
@@ -23,6 +24,7 @@ public class UtilisateurService {
                                           String motDePasseClair, String telephone,
                                           Role role, String image) {
         verifierEmailDisponible(email);
+        verifierTelephoneDisponible(telephone);
 
         if (nom == null || nom.isBlank() || prenom == null || prenom.isBlank()) {
             throw new IllegalArgumentException("Le nom et le prenom sont obligatoires.");
@@ -54,10 +56,16 @@ public class UtilisateurService {
             verifierEmailDisponible(nouvelEmail);
         }
 
+        String nouveauTelephone = (telephone == null || telephone.isBlank())
+                ? utilisateur.getTelephone() : telephone;
+        if (!nouveauTelephone.equals(utilisateur.getTelephone())) {
+            verifierTelephoneDisponible(nouveauTelephone);
+        }
+
         utilisateur.setNom(nom);
         utilisateur.setPrenom(prenom);
         utilisateur.setEmail(nouvelEmail);
-        utilisateur.setTelephone(telephone);
+        utilisateur.setTelephone(nouveauTelephone);
         utilisateur.setImage(image);
 
         return utilisateurRepository.update(utilisateur);
@@ -94,6 +102,17 @@ public class UtilisateurService {
         if (existant.isPresent()) {
             throw new EmailDejaUtiliseException(
                     "Un compte existe deja avec l'email : " + email);
+        }
+    }
+
+    private void verifierTelephoneDisponible(String telephone) {
+        if (telephone == null || telephone.isBlank()) {
+            return;
+        }
+        Optional<Utilisateur> existant = utilisateurRepository.findByTelephone(telephone);
+        if (existant.isPresent()) {
+            throw new TelephoneDejaUtiliseException(
+                    "Un compte existe deja avec le telephone : " + telephone);
         }
     }
 }

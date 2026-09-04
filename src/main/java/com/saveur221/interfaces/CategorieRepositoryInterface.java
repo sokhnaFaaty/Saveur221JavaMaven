@@ -7,6 +7,7 @@ import com.saveur221.entities.Categorie;
 
 public interface CategorieRepositoryInterface {
     Optional<Categorie> findById(Long id);
+    Optional<Categorie> findByLibelle(String libelle);
     List<Categorie> findAll();
     List<Categorie> search(String motCle);
     boolean contientDesProduits(Long categorieId);

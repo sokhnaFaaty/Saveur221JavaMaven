@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.saveur221.entities.Categorie;
 import com.saveur221.exceptions.CategorieInexistanteException;
+import com.saveur221.exceptions.LibelleDejaUtiliseException;
 import com.saveur221.interfaces.CategorieRepositoryInterface;
 
 
@@ -17,6 +18,9 @@ public class CategorieService {
     public Categorie ajouterCategorie(String libelle, String description) {
         if (libelle == null || libelle.isBlank()) {
             throw new IllegalArgumentException("Le libelle de la categorie est obligatoire.");
+        }
+        if (categorieRepository.findByLibelle(libelle).isPresent()) {
+            throw new LibelleDejaUtiliseException("Une categorie avec ce libelle existe deja.");
         }
         Categorie categorie = new Categorie(null, libelle, description);
         return categorieRepository.save(categorie);
@@ -34,6 +38,12 @@ public class CategorieService {
         Categorie categorie = categorieRepository.findById(id)
                 .orElseThrow(() -> new CategorieInexistanteException(
                         "Aucune categorie trouvee avec l'id " + id));
+
+        if (categorieRepository.findByLibelle(libelle)
+                .filter(c -> !c.getId().equals(id))
+                .isPresent()) {
+            throw new IllegalArgumentException("Une categorie avec ce libelle existe deja.");
+        }
 
         categorie.setLibelle(libelle);
         categorie.setDescription(description);

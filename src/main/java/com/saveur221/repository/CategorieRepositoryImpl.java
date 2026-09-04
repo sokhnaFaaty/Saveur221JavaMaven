@@ -36,6 +36,23 @@ public class CategorieRepositoryImpl implements CategorieRepositoryInterface{
     }
 
     @Override
+    public Optional<Categorie> findByLibelle(String libelle) {
+        String sql = "SELECT * FROM categories WHERE libelle = ?" + NON_SUPPRIME;
+        try (Connection conn = DatabaseConfig.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, libelle);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                return rs.next() ? Optional.of(hydrater(rs)) : Optional.empty();
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Erreur findByLibelle : " + e.getMessage(), e);
+        }
+    }
+
+    @Override
     public List<Categorie> findAll() {
         String sql = "SELECT * FROM categories WHERE deleted_at IS NULL ORDER BY libelle";
         List<Categorie> resultat = new ArrayList<>();
