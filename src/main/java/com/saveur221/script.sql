@@ -139,12 +139,12 @@ CREATE TABLE avis (
 
 -- ============================================================
 -- DONNEES DE TEST (2 utilisateurs pour tester la connexion Java)
--- Mots de passe en clair : admin123 / gerant123 (deja hashes en SHA-256)
+-- Mots de passe en clair : admin123 / gerant123 (hashes bcrypt)
 -- ============================================================
 INSERT INTO utilisateurs (nom, prenom, email, mot_de_passe, telephone, role, actif, image)
 VALUES
-('Sow', 'Abdoulaye', 'admin@saveur221.sn', '240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa822809f74c720a9', '771234567', 'ADMIN', true, NULL),
-('Gueye', 'Mariama', 'gerant@saveur221.sn', '0adea017a51a0224047865ad5b90b53289a93f01ef1b798ef8ae079b3c161640', '9012345', 'GERANT', true, NULL);
+('Sow', 'Abdoulaye', 'admin@saveur221.sn', '$2a$10$inqHABk8Sf92jhWZinhLnuCZMQVGmXcMCAW8uD3UelyxDq1grvB32', '771234567', 'ADMIN', true, NULL),
+('Gueye', 'Mariama', 'gerant@saveur221.sn', '$2a$10$I2kcbo45nyvFjLADI4Aydegw/CClG4aUbuix6ucA/pM7Inombq4QG', '9012345', 'GERANT', true, NULL);
 
 
 
