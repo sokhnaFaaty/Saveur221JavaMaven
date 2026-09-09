@@ -26,6 +26,13 @@
             <version>42.7.3</version>
         </dependency>
 
+        <!-- Bcrypt pour le hachage des mots de passe -->
+        <dependency>
+            <groupId>org.mindrot</groupId>
+            <artifactId>jbcrypt</artifactId>
+            <version>0.4</version>
+        </dependency>
+
         <!-- Tests unitaires -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>

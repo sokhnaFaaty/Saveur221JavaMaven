@@ -27,6 +27,12 @@ public class MenuGerant {
         this.statistiqueView = new StatistiqueView(scanner, statistiqueService);
     }
 
+    public CategorieView getCategorieView() { return categorieView; }
+    public ProduitView getProduitView() { return produitView; }
+    public CommandeView getCommandeView() { return commandeView; }
+    public PaiementView getPaiementView() { return paiementView; }
+    public StatistiqueView getStatistiqueView() { return statistiqueView; }
+
     public void afficher() {
         boolean continuer = true;
         while (continuer) {

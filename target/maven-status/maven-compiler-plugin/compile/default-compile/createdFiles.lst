@@ -14,10 +14,12 @@ com\saveur221\repository\ProduitRepositoryImpl.class
 com\saveur221\interfaces\UtilisateurRepositoryInterface.class
 com\saveur221\repository\PaiementRepositoryImpl.class
 com\saveur221\entities\LigneCommande.class
+com\saveur221\exceptions\LibelleDejaUtiliseException.class
 com\saveur221\enums\Etat.class
 com\saveur221\exceptions\CategorieInexistanteException.class
 com\saveur221\views\MenuPrincipal.class
 com\saveur221\services\CommandeService.class
+com\saveur221\exceptions\TelephoneDejaUtiliseException.class
 com\saveur221\views\MenuAdmin.class
 com\saveur221\views\PaiementView.class
 com\saveur221\entities\Utilisateur.class

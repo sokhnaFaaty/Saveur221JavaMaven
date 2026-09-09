@@ -143,8 +143,8 @@ CREATE TABLE avis (
 -- ============================================================
 INSERT INTO utilisateurs (nom, prenom, email, mot_de_passe, telephone, role, actif, image)
 VALUES
-('Diop', 'Amadou', 'admin@saveur221.sn', '240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa822809f74c720a9', '771234567', 'ADMIN', true, NULL),
-('Fall', 'Ibrahima', 'gerant@saveur221.sn', '0adea017a51a0224047865ad5b90b53289a93f01ef1b798ef8ae079b3c161640', '9012345', 'GERANT', true, NULL);
+('Sow', 'Abdoulaye', 'admin@saveur221.sn', '240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa822809f74c720a9', '771234567', 'ADMIN', true, NULL),
+('Gueye', 'Mariama', 'gerant@saveur221.sn', '0adea017a51a0224047865ad5b90b53289a93f01ef1b798ef8ae079b3c161640', '9012345', 'GERANT', true, NULL);
 
 
 

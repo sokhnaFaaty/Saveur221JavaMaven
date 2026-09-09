@@ -36,21 +36,11 @@ public class AuthService {
     }
 
     public boolean verifierMotDePasse(String saisi, String hash) {
-        return hasherMotDePasse(saisi).equals(hash);
+        return org.mindrot.jbcrypt.BCrypt.checkpw(saisi, hash);
     }
 
     public String hasherMotDePasse(String motDePasseClair) {
-        try {
-            java.security.MessageDigest digest = java.security.MessageDigest.getInstance("SHA-256");
-            byte[] hashBytes = digest.digest(motDePasseClair.getBytes(java.nio.charset.StandardCharsets.UTF_8));
-            StringBuilder sb = new StringBuilder();
-            for (byte b : hashBytes) {
-                sb.append(String.format("%02x", b));
-            }
-            return sb.toString();
-        } catch (java.security.NoSuchAlgorithmException e) {
-            throw new IllegalStateException("Algorithme de hashage indisponible", e);
-        }
+        return org.mindrot.jbcrypt.BCrypt.hashpw(motDePasseClair, org.mindrot.jbcrypt.BCrypt.gensalt());
     }
 
     private static final Pattern LONGUEUR_MIN = Pattern.compile("^.{6,}$");
