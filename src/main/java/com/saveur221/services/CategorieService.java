@@ -57,5 +57,31 @@ public class CategorieService {
         categorieRepository.delete(id);
     }
 
+    public List<Categorie> listerCategoriesSupprimees() {
+        return categorieRepository.findAllDeleted();
+    }
+
+    public Categorie restaurerCategorie(Long id) {
+        Categorie categorie = categorieRepository.findDeletedById(id)
+                .orElseThrow(() -> new CategorieInexistanteException(
+                        "Aucune categorie supprimee trouvee avec l'id " + id));
+
+        if (categorieRepository.findByLibelle(categorie.getLibelle()).isPresent()) {
+            throw new LibelleDejaUtiliseException(
+                    "Impossible de restaurer : une categorie avec ce libelle existe deja.");
+        }
+
+        categorieRepository.restaurer(id);
+        return categorie;
+    }
+
+    public void purgerCategorie(Long id) {
+        if (categorieRepository.findDeletedById(id).isEmpty()) {
+            throw new CategorieInexistanteException(
+                    "Aucune categorie supprimee trouvee avec l'id " + id);
+        }
+        categorieRepository.purger(id);
+    }
+
     
 }

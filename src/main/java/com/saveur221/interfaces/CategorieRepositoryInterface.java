@@ -14,5 +14,10 @@ public interface CategorieRepositoryInterface {
     Categorie save(Categorie categorie);
     Categorie update(Categorie categorie);
     void delete(Long id);
+
+    List<Categorie> findAllDeleted();
+    Optional<Categorie> findDeletedById(Long id);
+    void restaurer(Long id);
+    void purger(Long id);
 }
 

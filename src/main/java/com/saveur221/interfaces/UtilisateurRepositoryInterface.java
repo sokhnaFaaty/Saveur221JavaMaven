@@ -29,4 +29,16 @@ public interface UtilisateurRepositoryInterface {
 
     // Supprimer un utilisateur (soft delete)
     void delete(Long id);
+
+    // Lister les utilisateurs supprimes (corbeille)
+    List<Utilisateur> findAllDeleted();
+
+    // Trouver un utilisateur supprime par son ID (corbeille)
+    Optional<Utilisateur> findDeletedById(Long id);
+
+    // Restaurer un utilisateur supprime
+    void restaurer(Long id);
+
+    // Purger definitivement un utilisateur (suppression reelle)
+    void purger(Long id);
 }

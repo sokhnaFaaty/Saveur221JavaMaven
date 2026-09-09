@@ -16,4 +16,9 @@ public interface ProduitRepositoryInterface {
     Produit save(Produit produit);
     Produit update(Produit produit);
     void delete(Long id);
+
+    List<Produit> findAllDeleted();
+    Optional<Produit> findDeletedById(Long id);
+    void restaurer(Long id);
+    void purger(Long id);
 }
