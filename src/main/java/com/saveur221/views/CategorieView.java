@@ -25,6 +25,7 @@ public class CategorieView {
             System.out.println("3. Modifier");
             System.out.println("4. Supprimer");
             System.out.println("5. Rechercher");
+            System.out.println("6. Corbeille");
             System.out.println("0. Retour");
             System.out.print("Choix : ");
             String choix = scanner.nextLine().trim();
@@ -36,6 +37,7 @@ public class CategorieView {
                     case "3" -> modifier();
                     case "4" -> supprimer();
                     case "5" -> rechercher();
+                    case "6" -> corbeille();
                     case "0" -> continuer = false;
                     default -> System.out.println("Choix invalide.");
                 }
@@ -43,6 +45,45 @@ public class CategorieView {
                 System.out.println("Erreur : " + e.getMessage());
             }
         }
+    }
+
+    private void corbeille() {
+        boolean continuer = true;
+        while (continuer) {
+            System.out.println("\n--- CORBEILLE CATEGORIES ---");
+            System.out.println("1. Lister les categories supprimees");
+            System.out.println("2. Restaurer une categorie");
+            System.out.println("3. Purger une categorie (definitif)");
+            System.out.println("0. Retour");
+            System.out.print("Choix : ");
+            String choix = scanner.nextLine().trim();
+
+            try {
+                switch (choix) {
+                    case "1" -> afficherListe(categorieService.listerCategoriesSupprimees());
+                    case "2" -> restaurerCorbeille();
+                    case "3" -> purgerCorbeille();
+                    case "0" -> continuer = false;
+                    default -> System.out.println("Choix invalide.");
+                }
+            } catch (SaveurException | IllegalArgumentException e) {
+                System.out.println("Erreur : " + e.getMessage());
+            }
+        }
+    }
+
+    private void restaurerCorbeille() {
+        System.out.print("Id de la categorie a restaurer : ");
+        Long id = lireId();
+        Categorie categorie = categorieService.restaurerCategorie(id);
+        System.out.println("Categorie restauree : " + categorie);
+    }
+
+    private void purgerCorbeille() {
+        System.out.print("Id de la categorie a purger : ");
+        Long id = lireId();
+        categorieService.purgerCategorie(id);
+        System.out.println("Categorie purgee definitivement.");
     }
 
     private void ajouter() {
@@ -70,8 +111,19 @@ public class CategorieView {
     private void supprimer() {
         System.out.print("Id de la categorie a supprimer : ");
         Long id = lireId();
-        categorieService.supprimerCategorie(id);
-        System.out.println("Categorie supprimee.");
+        Categorie categorie = categorieService.consulterCategorie(id);
+        System.out.print("Voulez-vous supprimer la categorie '" + categorie.getLibelle() + "' ? (oui/non) : ");
+        if (confirmer()) {
+            categorieService.supprimerCategorie(id);
+            System.out.println("Categorie mise a la corbeille.");
+        } else {
+            System.out.println("Suppression annulee.");
+        }
+    }
+
+    private boolean confirmer() {
+        String reponse = scanner.nextLine().trim().toLowerCase();
+        return reponse.equals("oui") || reponse.equals("o") || reponse.equals("yes") || reponse.equals("y");
     }
 
     private void rechercher() {

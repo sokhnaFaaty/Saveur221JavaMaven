@@ -32,6 +32,7 @@ public class ProduitView {
             System.out.println("10. Produits en stock faible");
             System.out.println("11. Produits disponibles");
             System.out.println("12. Produits indisponibles");
+            System.out.println("13. Corbeille");
             System.out.println("0. Retour");
             System.out.print("Choix : ");
             String choix = scanner.nextLine().trim();
@@ -50,6 +51,7 @@ public class ProduitView {
                     case "10" -> afficherListe(produitService.listerProduitsStockFaible());
                     case "11" -> afficherListe(produitService.listerProduitsDisponibles());
                     case "12" -> afficherListe(produitService.listerProduitsIndisponibles());
+                    case "13" -> corbeille();
                     case "0" -> continuer = false;
                     default -> System.out.println("Choix invalide.");
                 }
@@ -57,6 +59,45 @@ public class ProduitView {
                 System.out.println("Erreur : " + e.getMessage());
             }
         }
+    }
+
+    private void corbeille() {
+        boolean continuer = true;
+        while (continuer) {
+            System.out.println("\n--- CORBEILLE PRODUITS ---");
+            System.out.println("1. Lister les produits supprimes");
+            System.out.println("2. Restaurer un produit");
+            System.out.println("3. Purger un produit (definitif)");
+            System.out.println("0. Retour");
+            System.out.print("Choix : ");
+            String choix = scanner.nextLine().trim();
+
+            try {
+                switch (choix) {
+                    case "1" -> afficherListe(produitService.listerProduitsSupprimees());
+                    case "2" -> restaurerCorbeille();
+                    case "3" -> purgerCorbeille();
+                    case "0" -> continuer = false;
+                    default -> System.out.println("Choix invalide.");
+                }
+            } catch (SaveurException | IllegalArgumentException e) {
+                System.out.println("Erreur : " + e.getMessage());
+            }
+        }
+    }
+
+    private void restaurerCorbeille() {
+        System.out.print("Id du produit a restaurer : ");
+        Long id = lireId();
+        Produit produit = produitService.restaurerProduit(id);
+        System.out.println("Produit restaure : " + produit);
+    }
+
+    private void purgerCorbeille() {
+        System.out.print("Id du produit a purger : ");
+        Long id = lireId();
+        produitService.purgerProduit(id);
+        System.out.println("Produit purge definitivement.");
     }
 
     private void ajouter() {
@@ -112,8 +153,20 @@ public class ProduitView {
     private void supprimer() {
         System.out.print("Id du produit a supprimer : ");
         Long id = lireId();
-        produitService.supprimerProduit(id);
-        System.out.println("Produit supprime.");
+        Produit produit = produitService.consulterProduit(id);
+        System.out.print("Voulez-vous supprimer le produit '" + produit.getLibelle() + "' (prix " + produit.getPrix()
+                + " FCFA) ? (oui/non) : ");
+        if (confirmer()) {
+            produitService.supprimerProduit(id);
+            System.out.println("Produit mis a la corbeille.");
+        } else {
+            System.out.println("Suppression annulee.");
+        }
+    }
+
+    private boolean confirmer() {
+        String reponse = scanner.nextLine().trim().toLowerCase();
+        return reponse.equals("oui") || reponse.equals("o") || reponse.equals("yes") || reponse.equals("y");
     }
 
     private void rechercher() {

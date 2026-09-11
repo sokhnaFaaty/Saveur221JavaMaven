@@ -43,6 +43,10 @@ public class UtilisateurService {
         return utilisateurRepository.findAll();
     }
 
+    public Utilisateur consulterUtilisateur(Long id) {
+        return getUtilisateur(id);
+    }
+
     public List<Utilisateur> rechercherUtilisateurs(String motCle) {
         return utilisateurRepository.search(motCle);
     }
@@ -74,6 +78,36 @@ public class UtilisateurService {
     public void supprimerUtilisateur(Long id) {
         getUtilisateur(id);
         utilisateurRepository.delete(id);
+    }
+
+    public List<Utilisateur> listerUtilisateursSupprimees() {
+        return utilisateurRepository.findAllDeleted();
+    }
+
+    public Utilisateur restaurerUtilisateur(Long id) {
+        Utilisateur utilisateur = utilisateurRepository.findDeletedById(id)
+                .orElseThrow(() -> new UtilisateurInexistantException(
+                        "Aucun utilisateur supprime trouve avec l'id " + id));
+
+        if (utilisateurRepository.findByEmail(utilisateur.getEmail()).isPresent()) {
+            throw new EmailDejaUtiliseException(
+                    "Impossible de restaurer : un compte existe avec l'email " + utilisateur.getEmail());
+        }
+        if (utilisateurRepository.findByTelephone(utilisateur.getTelephone()).isPresent()) {
+            throw new TelephoneDejaUtiliseException(
+                    "Impossible de restaurer : un compte existe avec le telephone " + utilisateur.getTelephone());
+        }
+
+        utilisateurRepository.restaurer(id);
+        return utilisateur;
+    }
+
+    public void purgerUtilisateur(Long id) {
+        if (utilisateurRepository.findDeletedById(id).isEmpty()) {
+            throw new UtilisateurInexistantException(
+                    "Aucun utilisateur supprime trouve avec l'id " + id);
+        }
+        utilisateurRepository.purger(id);
     }
 
     public Utilisateur activerDesactiver(Long id, boolean actif) {

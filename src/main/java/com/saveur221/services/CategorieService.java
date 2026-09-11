@@ -30,6 +30,12 @@ public class CategorieService {
         return categorieRepository.findAll();
     }
 
+    public Categorie consulterCategorie(Long id) {
+        return categorieRepository.findById(id)
+                .orElseThrow(() -> new CategorieInexistanteException(
+                        "Aucune categorie trouvee avec l'id " + id));
+    }
+
     public List<Categorie> rechercherCategorie(String motCle) {
         return categorieRepository.search(motCle);
     }
@@ -55,6 +61,32 @@ public class CategorieService {
         // La verification "contient des produits ?" est deja faite
         // dans CategorieRepositoryImpl.delete() -> pas besoin de la refaire ici.
         categorieRepository.delete(id);
+    }
+
+    public List<Categorie> listerCategoriesSupprimees() {
+        return categorieRepository.findAllDeleted();
+    }
+
+    public Categorie restaurerCategorie(Long id) {
+        Categorie categorie = categorieRepository.findDeletedById(id)
+                .orElseThrow(() -> new CategorieInexistanteException(
+                        "Aucune categorie supprimee trouvee avec l'id " + id));
+
+        if (categorieRepository.findByLibelle(categorie.getLibelle()).isPresent()) {
+            throw new LibelleDejaUtiliseException(
+                    "Impossible de restaurer : une categorie avec ce libelle existe deja.");
+        }
+
+        categorieRepository.restaurer(id);
+        return categorie;
+    }
+
+    public void purgerCategorie(Long id) {
+        if (categorieRepository.findDeletedById(id).isEmpty()) {
+            throw new CategorieInexistanteException(
+                    "Aucune categorie supprimee trouvee avec l'id " + id);
+        }
+        categorieRepository.purger(id);
     }
 
     

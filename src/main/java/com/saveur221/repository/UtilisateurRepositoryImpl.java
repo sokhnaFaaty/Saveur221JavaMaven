@@ -200,6 +200,70 @@ public class UtilisateurRepositoryImpl implements UtilisateurRepositoryInterface
         }
     }
 
+    @Override
+    public List<Utilisateur> findAllDeleted() {
+        String sql = "SELECT * FROM utilisateurs WHERE deleted_at IS NOT NULL ORDER BY nom";
+        List<Utilisateur> resultat = new ArrayList<>();
+
+        try (Connection conn = DatabaseConfig.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+                resultat.add(hydrater(rs));
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Erreur findAllDeleted : " + e.getMessage(), e);
+        }
+        return resultat;
+    }
+
+    @Override
+    public Optional<Utilisateur> findDeletedById(Long id) {
+        String sql = "SELECT * FROM utilisateurs WHERE id = ? AND deleted_at IS NOT NULL";
+        try (Connection conn = DatabaseConfig.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setLong(1, id);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                return rs.next() ? Optional.of(hydrater(rs)) : Optional.empty();
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Erreur findDeletedById : " + e.getMessage(), e);
+        }
+    }
+
+    @Override
+    public void restaurer(Long id) {
+        String sql = "UPDATE utilisateurs SET deleted_at = NULL WHERE id = ?";
+        try (Connection conn = DatabaseConfig.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setLong(1, id);
+            stmt.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Erreur restaurer : " + e.getMessage(), e);
+        }
+    }
+
+    @Override
+    public void purger(Long id) {
+        String sql = "DELETE FROM utilisateurs WHERE id = ?";
+        try (Connection conn = DatabaseConfig.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setLong(1, id);
+            stmt.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Erreur purger : " + e.getMessage(), e);
+        }
+    }
+
     // Méthode pour transformer une ligne SQL en objet Utilisateur
     private Utilisateur hydrater(ResultSet rs) throws SQLException {
         return new Utilisateur(

@@ -28,6 +28,7 @@ public class UtilisateurView {
             System.out.println("5. Supprimer");
             System.out.println("6. Activer / Desactiver");
             System.out.println("7. Changer le role");
+            System.out.println("8. Corbeille");
             System.out.println("0. Retour");
             System.out.print("Choix : ");
             String choix = scanner.nextLine().trim();
@@ -41,6 +42,7 @@ public class UtilisateurView {
                     case "5" -> supprimer();
                     case "6" -> activerDesactiver();
                     case "7" -> changerRole();
+                    case "8" -> corbeille();
                     case "0" -> continuer = false;
                     default -> System.out.println("Choix invalide.");
                 }
@@ -48,6 +50,45 @@ public class UtilisateurView {
                 System.out.println("Erreur : " + e.getMessage());
             }
         }
+    }
+
+    private void corbeille() {
+        boolean continuer = true;
+        while (continuer) {
+            System.out.println("\n--- CORBEILLE UTILISATEURS ---");
+            System.out.println("1. Lister les utilisateurs supprimes");
+            System.out.println("2. Restaurer un utilisateur");
+            System.out.println("3. Purger un utilisateur (definitif)");
+            System.out.println("0. Retour");
+            System.out.print("Choix : ");
+            String choix = scanner.nextLine().trim();
+
+            try {
+                switch (choix) {
+                    case "1" -> afficherListe(utilisateurService.listerUtilisateursSupprimees());
+                    case "2" -> restaurerCorbeille();
+                    case "3" -> purgerCorbeille();
+                    case "0" -> continuer = false;
+                    default -> System.out.println("Choix invalide.");
+                }
+            } catch (SaveurException | IllegalArgumentException e) {
+                System.out.println("Erreur : " + e.getMessage());
+            }
+        }
+    }
+
+    private void restaurerCorbeille() {
+        System.out.print("Id de l'utilisateur a restaurer : ");
+        Long id = lireId();
+        Utilisateur utilisateur = utilisateurService.restaurerUtilisateur(id);
+        System.out.println("Utilisateur restaure : " + utilisateur);
+    }
+
+    private void purgerCorbeille() {
+        System.out.print("Id de l'utilisateur a purger : ");
+        Long id = lireId();
+        utilisateurService.purgerUtilisateur(id);
+        System.out.println("Utilisateur purge definitivement.");
     }
 
     private void ajouter() {
@@ -99,8 +140,20 @@ public class UtilisateurView {
     private void supprimer() {
         System.out.print("Id de l'utilisateur a supprimer : ");
         Long id = lireId();
-        utilisateurService.supprimerUtilisateur(id);
-        System.out.println("Utilisateur supprime.");
+        Utilisateur utilisateur = utilisateurService.consulterUtilisateur(id);
+        System.out.print("Voulez-vous supprimer l'utilisateur '" + utilisateur.getNom() + " " + utilisateur.getPrenom()
+                + "' (" + utilisateur.getEmail() + ") ? (oui/non) : ");
+        if (confirmer()) {
+            utilisateurService.supprimerUtilisateur(id);
+            System.out.println("Utilisateur mis a la corbeille.");
+        } else {
+            System.out.println("Suppression annulee.");
+        }
+    }
+
+    private boolean confirmer() {
+        String reponse = scanner.nextLine().trim().toLowerCase();
+        return reponse.equals("oui") || reponse.equals("o") || reponse.equals("yes") || reponse.equals("y");
     }
 
     private void activerDesactiver() {

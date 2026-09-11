@@ -166,6 +166,78 @@ public class ProduitRepositoryImpl implements ProduitRepositoryInterface {
         }
     }
 
+    @Override
+    public List<Produit> findAllDeleted() {
+        String sql = SELECT_BASE + "WHERE p.deleted_at IS NOT NULL ORDER BY p.libelle";
+        return executerListe(sql, stmt -> {
+        });
+    }
+
+    @Override
+    public Optional<Produit> findDeletedById(Long id) {
+        String sql = SELECT_BASE + "WHERE p.id = ? AND p.deleted_at IS NOT NULL";
+        try (Connection conn = DatabaseConfig.getConnection();
+                PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setLong(1, id);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                return rs.next() ? Optional.of(hydrater(rs)) : Optional.empty();
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Erreur findDeletedById : " + e.getMessage(), e);
+        }
+    }
+
+    @Override
+    public void restaurer(Long id) {
+        String sql = "UPDATE produits SET deleted_at = NULL WHERE id = ?";
+        try (Connection conn = DatabaseConfig.getConnection();
+                PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setLong(1, id);
+            stmt.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Erreur restaurer : " + e.getMessage(), e);
+        }
+    }
+
+    @Override
+    public void purger(Long id) {
+        // Un produit encore reference par des lignes de commande ne peut pas
+        // etre supprime physiquement (contrainte de cle etrangere).
+        String sqlCount = "SELECT COUNT(*) FROM ligne_commandes WHERE produit_id = ?";
+        try (Connection conn = DatabaseConfig.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sqlCount)) {
+
+            stmt.setLong(1, id);
+            try (ResultSet rs = stmt.executeQuery()) {
+                rs.next();
+                if (rs.getInt(1) > 0) {
+                    throw new com.saveur221.exceptions.SaveurException(
+                            "Impossible de purger : ce produit figure dans " + rs.getInt(1)
+                            + " ligne(s) de commande. Il est conserve pour l'historique.");
+                }
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Erreur purger : " + e.getMessage(), e);
+        }
+
+        String sql = "DELETE FROM produits WHERE id = ?";
+        try (Connection conn = DatabaseConfig.getConnection();
+                PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setLong(1, id);
+            stmt.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Erreur purger : " + e.getMessage(), e);
+        }
+    }
+
     // Petit raccourci maison pour eviter de repeter le meme bloc try/catch
     // dans findAll, findByCategorie, search, findEnRupture, findStockFaible.
     private interface Parametreur {

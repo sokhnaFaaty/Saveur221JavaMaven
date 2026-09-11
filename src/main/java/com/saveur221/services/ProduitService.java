@@ -52,6 +52,12 @@ public class ProduitService {
         return produitRepository.findAll();
     }
 
+    public Produit consulterProduit(Long id) {
+        return produitRepository.findById(id)
+                .orElseThrow(() -> new ProduitInexistantException(
+                        "Aucun produit trouve avec l'id " + id));
+    }
+
     public List<Produit> listerParCategorie(Long categorieId) {
         return produitRepository.findByCategorie(categorieId);
     }
@@ -120,6 +126,39 @@ public class ProduitService {
 
     public void supprimerProduit(Long id) {
         produitRepository.delete(id);
+    }
+
+    public List<Produit> listerProduitsSupprimees() {
+        return produitRepository.findAllDeleted();
+    }
+
+    public Produit restaurerProduit(Long id) {
+        Produit produit = produitRepository.findDeletedById(id)
+                .orElseThrow(() -> new ProduitInexistantException(
+                        "Aucun produit supprime trouve avec l'id " + id));
+
+        if (produitRepository.findByLibelle(produit.getLibelle()).isPresent()) {
+            throw new IllegalArgumentException("Impossible de restaurer : un produit avec ce libelle existe deja.");
+        }
+
+        // Si la categorie du produit est elle aussi supprimee, il faut
+        // d'abord la restaurer pour garder des donnees coherentes.
+        Categorie categorie = categorieRepository.findById(produit.getCategorie().getId())
+                .orElseThrow(() -> new CategorieInexistanteException(
+                        "Impossible de restaurer : la categorie '" + produit.getCategorie().getLibelle()
+                        + "' est aussi dans la corbeille. Restaurez-la d'abord."));
+
+        produit.setCategorie(categorie);
+        produitRepository.restaurer(id);
+        return produit;
+    }
+
+    public void purgerProduit(Long id) {
+        if (produitRepository.findDeletedById(id).isEmpty()) {
+            throw new ProduitInexistantException(
+                    "Aucun produit supprime trouve avec l'id " + id);
+        }
+        produitRepository.purger(id);
     }
 
     public Produit approvisionner(Long id, int quantite) {

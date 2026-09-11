@@ -173,6 +173,90 @@ public class CategorieRepositoryImpl implements CategorieRepositoryInterface{
         }
     }
 
+    @Override
+    public List<Categorie> findAllDeleted() {
+        String sql = "SELECT * FROM categories WHERE deleted_at IS NOT NULL ORDER BY libelle";
+        List<Categorie> resultat = new ArrayList<>();
+
+        try (Connection conn = DatabaseConfig.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+                resultat.add(hydrater(rs));
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Erreur findAllDeleted : " + e.getMessage(), e);
+        }
+        return resultat;
+    }
+
+    @Override
+    public Optional<Categorie> findDeletedById(Long id) {
+        String sql = "SELECT * FROM categories WHERE id = ? AND deleted_at IS NOT NULL";
+        try (Connection conn = DatabaseConfig.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setLong(1, id);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                return rs.next() ? Optional.of(hydrater(rs)) : Optional.empty();
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Erreur findDeletedById : " + e.getMessage(), e);
+        }
+    }
+
+    @Override
+    public void restaurer(Long id) {
+        String sql = "UPDATE categories SET deleted_at = NULL WHERE id = ?";
+        try (Connection conn = DatabaseConfig.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setLong(1, id);
+            stmt.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Erreur restaurer : " + e.getMessage(), e);
+        }
+    }
+
+    @Override
+    public void purger(Long id) {
+        // Une categorie encore referencee par des produits (memes supprimes)
+        // ne peut pas etre supprimee physiquement (contrainte de cle etrangere).
+        String sqlCount = "SELECT COUNT(*) FROM produits WHERE categorie_id = ?";
+        try (Connection conn = DatabaseConfig.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sqlCount)) {
+
+            stmt.setLong(1, id);
+            try (ResultSet rs = stmt.executeQuery()) {
+                rs.next();
+                if (rs.getInt(1) > 0) {
+                    throw new CategorieNonSupprimableException(
+                            "Impossible de purger : des produits sont encore rattaches a cette categorie. "
+                            + "Supprimez ou purgez d'abord ces produits.");
+                }
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Erreur purger : " + e.getMessage(), e);
+        }
+
+        String sql = "DELETE FROM categories WHERE id = ?";
+        try (Connection conn = DatabaseConfig.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setLong(1, id);
+            stmt.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Erreur purger : " + e.getMessage(), e);
+        }
+    }
+
     private Categorie hydrater(ResultSet rs) throws SQLException {
         return new Categorie(
                 rs.getLong("id"),
