@@ -140,8 +140,20 @@ public class UtilisateurView {
     private void supprimer() {
         System.out.print("Id de l'utilisateur a supprimer : ");
         Long id = lireId();
-        utilisateurService.supprimerUtilisateur(id);
-        System.out.println("Utilisateur supprime.");
+        Utilisateur utilisateur = utilisateurService.consulterUtilisateur(id);
+        System.out.print("Voulez-vous supprimer l'utilisateur '" + utilisateur.getNom() + " " + utilisateur.getPrenom()
+                + "' (" + utilisateur.getEmail() + ") ? (oui/non) : ");
+        if (confirmer()) {
+            utilisateurService.supprimerUtilisateur(id);
+            System.out.println("Utilisateur mis a la corbeille.");
+        } else {
+            System.out.println("Suppression annulee.");
+        }
+    }
+
+    private boolean confirmer() {
+        String reponse = scanner.nextLine().trim().toLowerCase();
+        return reponse.equals("oui") || reponse.equals("o") || reponse.equals("yes") || reponse.equals("y");
     }
 
     private void activerDesactiver() {

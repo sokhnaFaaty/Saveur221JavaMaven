@@ -30,6 +30,12 @@ public class CategorieService {
         return categorieRepository.findAll();
     }
 
+    public Categorie consulterCategorie(Long id) {
+        return categorieRepository.findById(id)
+                .orElseThrow(() -> new CategorieInexistanteException(
+                        "Aucune categorie trouvee avec l'id " + id));
+    }
+
     public List<Categorie> rechercherCategorie(String motCle) {
         return categorieRepository.search(motCle);
     }

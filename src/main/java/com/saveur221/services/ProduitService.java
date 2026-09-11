@@ -52,6 +52,12 @@ public class ProduitService {
         return produitRepository.findAll();
     }
 
+    public Produit consulterProduit(Long id) {
+        return produitRepository.findById(id)
+                .orElseThrow(() -> new ProduitInexistantException(
+                        "Aucun produit trouve avec l'id " + id));
+    }
+
     public List<Produit> listerParCategorie(Long categorieId) {
         return produitRepository.findByCategorie(categorieId);
     }

@@ -111,8 +111,19 @@ public class CategorieView {
     private void supprimer() {
         System.out.print("Id de la categorie a supprimer : ");
         Long id = lireId();
-        categorieService.supprimerCategorie(id);
-        System.out.println("Categorie supprimee.");
+        Categorie categorie = categorieService.consulterCategorie(id);
+        System.out.print("Voulez-vous supprimer la categorie '" + categorie.getLibelle() + "' ? (oui/non) : ");
+        if (confirmer()) {
+            categorieService.supprimerCategorie(id);
+            System.out.println("Categorie mise a la corbeille.");
+        } else {
+            System.out.println("Suppression annulee.");
+        }
+    }
+
+    private boolean confirmer() {
+        String reponse = scanner.nextLine().trim().toLowerCase();
+        return reponse.equals("oui") || reponse.equals("o") || reponse.equals("yes") || reponse.equals("y");
     }
 
     private void rechercher() {

@@ -153,8 +153,20 @@ public class ProduitView {
     private void supprimer() {
         System.out.print("Id du produit a supprimer : ");
         Long id = lireId();
-        produitService.supprimerProduit(id);
-        System.out.println("Produit supprime.");
+        Produit produit = produitService.consulterProduit(id);
+        System.out.print("Voulez-vous supprimer le produit '" + produit.getLibelle() + "' (prix " + produit.getPrix()
+                + " FCFA) ? (oui/non) : ");
+        if (confirmer()) {
+            produitService.supprimerProduit(id);
+            System.out.println("Produit mis a la corbeille.");
+        } else {
+            System.out.println("Suppression annulee.");
+        }
+    }
+
+    private boolean confirmer() {
+        String reponse = scanner.nextLine().trim().toLowerCase();
+        return reponse.equals("oui") || reponse.equals("o") || reponse.equals("yes") || reponse.equals("y");
     }
 
     private void rechercher() {

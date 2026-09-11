@@ -43,6 +43,10 @@ public class UtilisateurService {
         return utilisateurRepository.findAll();
     }
 
+    public Utilisateur consulterUtilisateur(Long id) {
+        return getUtilisateur(id);
+    }
+
     public List<Utilisateur> rechercherUtilisateurs(String motCle) {
         return utilisateurRepository.search(motCle);
     }
